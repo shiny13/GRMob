@@ -135,6 +135,7 @@ class Level1Scene: SKScene {
         scoreLabel.fontColor = SKColor(red: 0.89, green: 0.44, blue: 0.10, alpha: 1)
         scoreLabel.position = CGPointMake(self.size.width * 0.85, self.size.height * 0.95)
         self.addChild(scoreLabel)
+        
     }
     
     func generateCheckboxes()
@@ -223,6 +224,24 @@ class Level1Scene: SKScene {
         defaults.synchronize()
     }
     
+    //MARK: Label Effects
+    func tryAgainEffect()
+    {
+        var tryLabel: SKLabelNode = SKLabelNode(fontNamed: "Papyrus")
+        tryLabel.text = "Try Again!"
+        tryLabel.fontSize = 150
+        tryLabel.fontColor = SKColor(red: 0.55, green: 0, blue: 0, alpha: 1)
+        tryLabel.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.5)
+        tryLabel.setScale(0.1)
+        self.addChild(tryLabel)
+        
+        let scaleAction = SKAction.scaleTo(1, duration: 0.6)
+        let fadeAway = SKAction.fadeOutWithDuration(2.0)
+        let removeNode = SKAction.removeFromParent()
+        let sequence = SKAction.sequence([scaleAction, fadeAway, removeNode])
+        tryLabel.runAction(sequence)
+    }
+        
     //MARK: Handle touch events
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         
@@ -240,7 +259,9 @@ class Level1Scene: SKScene {
                 self.score += 1000
                 println("Touch Began Score: \(score)")
             }
+
             self.touch++
+            
         }
         
         if node.name == "check2" {
@@ -251,6 +272,7 @@ class Level1Scene: SKScene {
                 self.score += 1000
                 println("Touch Began Score: \(score)")
             }
+
             self.touch++
         }
         
@@ -278,6 +300,7 @@ class Level1Scene: SKScene {
             else {
                 if self.touch < 1 {
                     self.counter--
+                    tryAgainEffect()
                     return;
                 }
                 
