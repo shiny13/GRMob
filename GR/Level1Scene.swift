@@ -17,6 +17,7 @@ class Level1Scene: SKScene {
     var counter: Int
     var score: Int
     var touch: Int
+    var level: Int
     var level2Bg = SKSpriteNode(imageNamed: "paper1.jpg")
     var nextButton = SKSpriteNode (imageNamed: "arrow.png")
     var check1: SKSpriteNode = SKSpriteNode (imageNamed: "unchecked.png")
@@ -32,10 +33,6 @@ class Level1Scene: SKScene {
     //Background sprite array
     var backgrounds:[Background] = []
     
-    // 2 checkboxes using Checkbox class
-    //let checkbox1 = Checkbox()
-    //let checkbox2 = Checkbox()
-    
     //MARK: required constructor
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -45,6 +42,7 @@ class Level1Scene: SKScene {
         self.counter = 0
         self.score = 0
         self.touch = 0
+        self.level = 1
         
         super.init(size: size)
     }
@@ -52,9 +50,6 @@ class Level1Scene: SKScene {
     //MARK: generate the ground
     func generateBackground()
     {
-        //level2Bg.position = CGPointMake(self.size.width/2, self.size.height/2)
-        //self.addChild(level2Bg)
-        
         self.backgroundColor = UIColor(red: 0.53, green: 0.81, blue:
             0.98, alpha: 1.0);
         
@@ -107,13 +102,9 @@ class Level1Scene: SKScene {
     func refreshLabels(qSet: QuestionSet)
     {
         qLabel.text = qSet.question as String
-        //println("Question: " + qLabel.text)
         answer1.text = qSet.answer1.answer as String
-        //println("A1: " + answer1.text)
         answer2.text = qSet.answer2.answer as String
-        //println("A2: " + answer2.text)
         scoreLabel.text = "Score: \(score)"
-        //println("Score: \(score)")
     }
     
     func drawLabelSprite(quesSet: QuestionSet)
@@ -158,12 +149,6 @@ class Level1Scene: SKScene {
         self.check2.name = "check2"
         self.addChild(self.check2)
         
-        //Using the spawn function to draw the sprite to the screen
-        /*checkbox1.spawn(world, position: CGPoint(x: self.size.width * 0.25, y: self.size.height * 0.84), size: CGSize(width: 45, height: 45))
-        checkbox2.spawn(world, position: CGPoint(x: self.size.width * 0.25, y: self.size.height * 0.75), size: CGSize(width: 45, height: 45))
-        
-        checkbox1.name = "check1"
-        checkbox2.name = "check2"*/
     }
     
     func generateTipSprite() {
@@ -181,11 +166,14 @@ class Level1Scene: SKScene {
         /* Setup your scene here */
         // Add the world node as a child of the scene
         self.addChild(world)
-        
-        quesList = QuestionSetList(level: 1)
         self.counter = 0
         self.score = 0
+        self.level = 1 //Default value to avoid errors
         
+        loadSavedScore()
+        loadSavedLevel()
+        
+        quesList = QuestionSetList(level: level)
         generateBackground()
         generateGround()
         generateQuestion()
@@ -195,28 +183,63 @@ class Level1Scene: SKScene {
         
     }
     
+    //MARK: Load NSUserDefaults values
+    func loadSavedScore() {
+        if let key: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("Score"){
+            self.score = key as! IntegerLiteralType
+            println("Retrieving score: \(score)")
+        }
+        else {
+            // does not exist
+            println("Saving score for the 1st time")
+            NSUserDefaults.standardUserDefaults().setInteger(self.score, forKey:"Score")
+        }
+    }
+    
+    func loadSavedLevel() {
+        if let key: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("Level"){
+            self.level = key as! IntegerLiteralType
+            println("Retrieving level: \(level)")
+        }
+        else {
+            // does not exist
+            println("Saving level for the 1st time")
+            NSUserDefaults.standardUserDefaults().setInteger(self.level, forKey:"Level")
+        }
+    }
+    
+    //MARK: Save to NSUserDefaults
+    func saveScore(){
+        println("Score before transition: \(score)")
+        var defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(self.score, forKey: "Score")
+        defaults.synchronize()
+    }
+    
+    func saveLevel(){
+        println("Level before transition: \(level)")
+        var defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(self.level, forKey: "Level")
+        defaults.synchronize()
+    }
+    
     //MARK: Handle touch events
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         
         var touch = touches as!  Set<UITouch>
         var location = touch.first!.locationInNode(self)
         var node = self.nodeAtPoint(location)
+        var quesSet: QuestionSet = quesList.questionList[self.counter]
         
         // If next button is touched, start transition to second scene
         if node.name == "check1" {
             self.check1.texture = SKTexture(imageNamed: "checked.png")
-            //var texAction = SKAction.setTexture(SKTexture(imageNamed: "checked.png"))
-            //self.check1.runAction(texAction)
-            
             self.check2.texture = SKTexture(imageNamed: "unchecked.png")
-            //self.check2.runAction(texAction)
             
-            //checkbox1.onTap()
-            
-            //Accumulating free points
-            self.score += 1000
-            println("Touch Began Score: \(score)")
-            
+            if self.touch < 1 && quesSet.answer1.correct == true {
+                self.score += 1000
+                println("Touch Began Score: \(score)")
+            }
             self.touch++
         }
         
@@ -224,6 +247,10 @@ class Level1Scene: SKScene {
             self.check1.texture = SKTexture(imageNamed: "unchecked.png")
             self.check2.texture = SKTexture(imageNamed: "checked.png")
             
+            if self.touch < 1 && quesSet.answer2.correct == true {
+                self.score += 1000
+                println("Touch Began Score: \(score)")
+            }
             self.touch++
         }
         
@@ -233,12 +260,20 @@ class Level1Scene: SKScene {
             
             println("Count val: \(self.quesList.questionList.count)")
             if counter >= self.quesList.questionList.count {
+                saveScore()
                 
-                println("Score before transition: \(score)")
-                var secondScene = BuyItemScene(size: self.size)
-                var transition = SKTransition.crossFadeWithDuration(1.0)
-                secondScene.scaleMode = SKSceneScaleMode.AspectFill
-                self.scene!.view?.presentScene(secondScene, transition: transition)
+                if self.level < 4 {
+                    self.level++
+                    saveLevel()
+                    var newScene = BuyItemScene(size: self.size)
+                    loadScene(newScene)
+                } else {
+                    self.level = 1
+                    saveLevel()
+                    var newScene = GameScene(size: self.size)
+                    loadScene(newScene)
+                }
+                
             }
             else {
                 if self.touch < 1 {
@@ -252,6 +287,14 @@ class Level1Scene: SKScene {
             }
         }
         
+    }
+    
+    //Mark: Load Scene
+    func loadScene(newScene: SKScene)
+    {
+        var transition = SKTransition.crossFadeWithDuration(0.5)
+        newScene.scaleMode = SKSceneScaleMode.AspectFill
+        self.scene!.view?.presentScene(newScene, transition: transition)
     }
     
     //MARK: Simulate physics

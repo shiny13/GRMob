@@ -34,13 +34,6 @@ class GameScene: SKScene {
     }
     
     override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-        /*let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!";
-        myLabel.fontSize = 65;
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
-        
-        self.addChild(myLabel)*/
         
         // Add the world node as a child of the scene
         self.addChild(world)
@@ -78,6 +71,8 @@ class GameScene: SKScene {
                 
         spawnBees()
         
+        //For testing, start with level 1
+        //NSUserDefaults.standardUserDefaults().setInteger(1, forKey:"Level")
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -89,7 +84,7 @@ class GameScene: SKScene {
         // If next button is touched, start transition to second scene
         if (node.name == "skipButton") {
             var secondScene = Level1Scene(size: self.size)
-            var transition = SKTransition.flipVerticalWithDuration(1.0)
+            var transition = SKTransition.crossFadeWithDuration(0.5)
             secondScene.scaleMode = SKSceneScaleMode.AspectFill
             self.scene!.view?.presentScene(secondScene, transition: transition)
         }

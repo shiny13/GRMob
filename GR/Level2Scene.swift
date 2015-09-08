@@ -199,8 +199,10 @@ class Level2Scene: SKScene {
             self.check2.texture = SKTexture(imageNamed: "unchecked.png")
             
             //Accumulating free points
-            self.score += 1000
-            println("Touch Began Score: \(score)")
+            if self.touch < 1 {
+                self.score += 1000
+                println("Touch Began Score: \(score)")
+            }
             
             self.touch++
         }

@@ -12,6 +12,7 @@ class BuyItemScene: SKScene {
     //MARK: Properties
     let world = SKNode()
     
+    var score: Int = 0
     var nextButton1 = SKSpriteNode (imageNamed: "arrow.png")
     var bg = SKSpriteNode(imageNamed: "buybg.jpg")
     let buyLabel = SKLabelNode(fontNamed:"Futura")
@@ -21,6 +22,7 @@ class BuyItemScene: SKScene {
     var trees = SKSpriteNode(imageNamed: "solarPanel.jpg")
     var parks = SKSpriteNode(imageNamed: "solarPanel.jpg")
     var cycles = SKSpriteNode(imageNamed: "solarPanel.jpg")
+    var scoreLabel = SKLabelNode(fontNamed: "Thonburi")
     
     func drawBackground()
     {
@@ -35,6 +37,12 @@ class BuyItemScene: SKScene {
         buyLabel.fontColor = SKColor(red: 0.49, green: 0.80, blue: 0.49, alpha: 1)
         buyLabel.position = CGPointMake(self.size.width/2, self.size.height * 0.9)
         self.addChild(buyLabel)
+        
+        scoreLabel.text = "Score: \(score)"
+        scoreLabel.fontSize = 30
+        scoreLabel.fontColor = SKColor(red: 0.80, green: 0.89, blue: 0.45, alpha: 1)
+        scoreLabel.position = CGPointMake(self.size.width * 0.80, self.size.height * 0.92)
+        self.addChild(scoreLabel)
     }
     
     func drawItems()
@@ -72,10 +80,33 @@ class BuyItemScene: SKScene {
         self.addChild(nextButton1)
     }
     
+    //MARK: Load NSUserDefaults values
+    func loadSavedScore() {
+        if let key: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("Score"){
+            self.score = key as! IntegerLiteralType
+            println("Retrieving score: \(score)")
+        }
+        else {
+            // does not exist
+            println("Saving score for the 1st time")
+            NSUserDefaults.standardUserDefaults().setInteger(self.score, forKey:"Score")
+        }
+    }
+    
+    //MARK: Save to NSUserDefaults
+    func saveScore(){
+        println("Score before transition: \(score)")
+        var defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(self.score, forKey: "Score")
+        defaults.synchronize()
+    }
+    
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         self.addChild(world)
         
+        loadSavedScore()
         generateButton()
         //drawBackground()
         drawLabel()
@@ -91,8 +122,8 @@ class BuyItemScene: SKScene {
         
         if node.name == "next1" {
             
-            var newScene = Level2Scene(size: self.size)
-            var transition = SKTransition.crossFadeWithDuration(1.0)
+            var newScene = Level1Scene(size: self.size)
+            var transition = SKTransition.crossFadeWithDuration(0.5)
             newScene.scaleMode = SKSceneScaleMode.AspectFill
             self.scene!.view?.presentScene(newScene, transition: transition)
 

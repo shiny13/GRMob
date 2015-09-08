@@ -39,7 +39,6 @@
 		3DA1EA541B958E8A0053DA62 /* QuestionSetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA1EA531B958E8A0053DA62 /* QuestionSetList.swift */; };
 		3DA1EA581B95B2C90053DA62 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA1EA561B95B2C90053DA62 /* checked.png */; };
 		3DA1EA591B95B2C90053DA62 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA1EA571B95B2C90053DA62 /* unchecked.png */; };
-		3DD206241B95273900A123F9 /* PlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD206231B95273900A123F9 /* PlayScene.swift */; };
 		3DF023E01B968CD400262699 /* buybg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3DF023DF1B968CD400262699 /* buybg.jpg */; };
 		3DF023E21B9690D500262699 /* solarpanel.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3DF023E11B9690D500262699 /* solarpanel.jpg */; };
 		3DF831AA1B9957E700A218CE /* redcancel1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF831A81B9957E700A218CE /* redcancel1.png */; };
@@ -94,7 +93,6 @@
 		3DA1EA531B958E8A0053DA62 /* QuestionSetList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionSetList.swift; sourceTree = "<group>"; };
 		3DA1EA561B95B2C90053DA62 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
 		3DA1EA571B95B2C90053DA62 /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
-		3DD206231B95273900A123F9 /* PlayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayScene.swift; sourceTree = "<group>"; };
 		3DF023DF1B968CD400262699 /* buybg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = buybg.jpg; sourceTree = "<group>"; };
 		3DF023E11B9690D500262699 /* solarpanel.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = solarpanel.jpg; sourceTree = "<group>"; };
 		3DF831A81B9957E700A218CE /* redcancel1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redcancel1.png; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 				3D2EC1811B938CB900DAF2CB /* AppDelegate.swift */,
 				3D2EC1831B938CB900DAF2CB /* GameScene.sks */,
 				3D2EC1851B938CB900DAF2CB /* GameScene.swift */,
-				3DD206231B95273900A123F9 /* PlayScene.swift */,
 				3D5962741B94F54C0049FEEF /* Level1Scene.swift */,
 				3D2EC1B71B93BD0C00DAF2CB /* Level2Scene.swift */,
 				3D2EC1B91B93BD1C00DAF2CB /* BuyItemScene.swift */,
@@ -346,7 +343,6 @@
 				3D5ECAD01B98774E00EC34CF /* Background.swift in Sources */,
 				3D5ECAC71B9820D300EC34CF /* GameSprite.swift in Sources */,
 				3D2EC1861B938CB900DAF2CB /* GameScene.swift in Sources */,
-				3DD206241B95273900A123F9 /* PlayScene.swift in Sources */,
 				3D5ECACE1B9861E600EC34CF /* Ground.swift in Sources */,
 				3D5ECACA1B984F5F00EC34CF /* Bee.swift in Sources */,
 				3DA1EA521B958B7C0053DA62 /* Answer.swift in Sources */,
