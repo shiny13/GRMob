@@ -20,7 +20,6 @@
 		3D2EC1AA1B93A36400DAF2CB /* Next.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2EC1A91B93A36400DAF2CB /* Next.png */; };
 		3D2EC1AC1B93A6A100DAF2CB /* skip.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2EC1AB1B93A6A100DAF2CB /* skip.png */; };
 		3D2EC1B41B93BC6700DAF2CB /* paper1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3D2EC1B31B93BC6700DAF2CB /* paper1.jpg */; };
-		3D2EC1B81B93BD0C00DAF2CB /* Level2Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EC1B71B93BD0C00DAF2CB /* Level2Scene.swift */; };
 		3D2EC1BA1B93BD1C00DAF2CB /* BuyItemScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EC1B91B93BD1C00DAF2CB /* BuyItemScene.swift */; };
 		3D5962751B94F54C0049FEEF /* Level1Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5962741B94F54C0049FEEF /* Level1Scene.swift */; };
 		3D5ECAC71B9820D300EC34CF /* GameSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5ECAC61B9820D300EC34CF /* GameSprite.swift */; };
@@ -74,7 +73,6 @@
 		3D2EC1A91B93A36400DAF2CB /* Next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Next.png; sourceTree = "<group>"; };
 		3D2EC1AB1B93A6A100DAF2CB /* skip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skip.png; sourceTree = "<group>"; };
 		3D2EC1B31B93BC6700DAF2CB /* paper1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = paper1.jpg; sourceTree = "<group>"; };
-		3D2EC1B71B93BD0C00DAF2CB /* Level2Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level2Scene.swift; sourceTree = "<group>"; };
 		3D2EC1B91B93BD1C00DAF2CB /* BuyItemScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyItemScene.swift; sourceTree = "<group>"; };
 		3D5962741B94F54C0049FEEF /* Level1Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level1Scene.swift; sourceTree = "<group>"; };
 		3D5ECAC61B9820D300EC34CF /* GameSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSprite.swift; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 				3D2EC1831B938CB900DAF2CB /* GameScene.sks */,
 				3D2EC1851B938CB900DAF2CB /* GameScene.swift */,
 				3D5962741B94F54C0049FEEF /* Level1Scene.swift */,
-				3D2EC1B71B93BD0C00DAF2CB /* Level2Scene.swift */,
 				3D2EC1B91B93BD1C00DAF2CB /* BuyItemScene.swift */,
 				3D2EC1871B938CB900DAF2CB /* GameViewController.swift */,
 				3D2EC1891B938CB900DAF2CB /* Main.storyboard */,
@@ -349,7 +346,6 @@
 				3D2EC1881B938CB900DAF2CB /* GameViewController.swift in Sources */,
 				3D2EC1BA1B93BD1C00DAF2CB /* BuyItemScene.swift in Sources */,
 				3D5962751B94F54C0049FEEF /* Level1Scene.swift in Sources */,
-				3D2EC1B81B93BD0C00DAF2CB /* Level2Scene.swift in Sources */,
 				3DA1EA541B958E8A0053DA62 /* QuestionSetList.swift in Sources */,
 				3D2EC1821B938CB900DAF2CB /* AppDelegate.swift in Sources */,
 				3DF831AC1B99582900A218CE /* TipSprite.swift in Sources */,
