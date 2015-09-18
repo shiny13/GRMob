@@ -84,19 +84,19 @@ class BuyItemScene: SKScene {
     func loadSavedScore() {
         if let key: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("Score"){
             self.score = key as! IntegerLiteralType
-            println("Retrieving score: \(score)")
+            print("Retrieving score: \(score)")
         }
         else {
             // does not exist
-            println("Saving score for the 1st time")
+            print("Saving score for the 1st time")
             NSUserDefaults.standardUserDefaults().setInteger(self.score, forKey:"Score")
         }
     }
     
     //MARK: Save to NSUserDefaults
     func saveScore(){
-        println("Score before transition: \(score)")
-        var defaults = NSUserDefaults.standardUserDefaults()
+        print("Score before transition: \(score)")
+        let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setInteger(self.score, forKey: "Score")
         defaults.synchronize()
     }
@@ -114,16 +114,16 @@ class BuyItemScene: SKScene {
     }
     
     //MARK: Handle touch events
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        var touch = touches as!  Set<UITouch>
-        var location = touch.first!.locationInNode(self)
-        var node = self.nodeAtPoint(location)
+        let touch = touches 
+        let location = touch.first!.locationInNode(self)
+        let node = self.nodeAtPoint(location)
         
         if node.name == "next1" {
             
-            var newScene = Level1Scene(size: self.size)
-            var transition = SKTransition.crossFadeWithDuration(0.5)
+            let newScene = Level1Scene(size: self.size)
+            let transition = SKTransition.crossFadeWithDuration(0.5)
             newScene.scaleMode = SKSceneScaleMode.AspectFill
             self.scene!.view?.presentScene(newScene, transition: transition)
 

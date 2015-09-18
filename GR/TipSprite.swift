@@ -22,7 +22,7 @@ class TipSprite: SKSpriteNode {
         //Anchor position from the bottom left:
         self.anchorPoint = CGPointZero
         //Start background on top of the ice
-        self.position = CGPoint(x: -250, y: 100)
+        self.position = CGPoint(x: -250, y: 0)
         //To control the order of the background
         self.zPosition = zPosition
         //Add this background to the parent node
@@ -40,11 +40,16 @@ class TipSprite: SKSpriteNode {
         self.addChild(newBGNode)
         
         label.text = tip
-        label.fontSize = 30
+        label.fontSize = 20
         label.fontColor = SKColor(red: 0.76, green: 0.42, blue: 0.18, alpha: 1)
         label.position = CGPointMake(backgroundSize.width * 0.5, backgroundSize.height * 0.8)
         self.addChild(label)
         
+    }
+    
+    func changeTip(tip: String)
+    {
+        label.text = tip
     }
     
     func createAnimations () {

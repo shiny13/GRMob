@@ -27,132 +27,101 @@ class QuestionSetList: NSObject {
                 generateLevel1List()
                 testList()
             case 2:
-                generateLevel2List()
+                generateLevel1List()
                 testList()
             case 3:
-                generateLevel3List()
+                generateLevel1List()
                 testList()
             case 4:
-                generateLevel4List()
+                generateLevel1List()
                 testList()
             default:
-                println("Make a decision already!")
+                print("Make a decision already!")
         }
     }
     
     func generateLevel1List()
     {
-        var ans1 = makeAnswer("True", boolVal: true)
-        var ans2 = makeAnswer("False", boolVal: false)
-        var qs1 = QuestionSet(question: "Do you use the yellow bin to throw away paper?", answer1: ans1, answer2: ans2)
+        //Question set 1
+        var tip = "In Australia There are many local collection programs for different types of e-waste including electronic equipment."
+        var ans1 = makeAnswer("No way", boolVal: false)
+        var ans2 = makeAnswer("Do nothing", boolVal: false)
+        var ans3 = makeAnswer("Break them in pieces", boolVal: false)
+        var ans4 = makeAnswer("Yes, ofcourse", boolVal: true)
+        var ques = "Should electronic waste be recycled?"
+        let qs1 = QuestionSet(tip: tip, question: ques, answer1: ans1, answer2: ans2, answer3: ans3, answer4: ans4)
         questionList.append(qs1)
         
-        var qs2 = QuestionSet(question: "Do you use the yellow bin to throw away cans?", answer1: ans1, answer2: ans2)
+        //Question set 2
+        tip = "Magazines, catalogs and other materials printed on similar paper should be recycled."
+        ans1 = makeAnswer("Throw them in the recycle bin", boolVal: true)
+        ans2 = makeAnswer("Do nothing", boolVal: false)
+        ans3 = makeAnswer("Make a paper plane", boolVal: false)
+        ans4 = makeAnswer("Make a paper boat", boolVal: false)
+        ques = "What is the best thing to do with old newspapers?"
+        let qs2 = QuestionSet(tip: tip, question: ques, answer1: ans1, answer2: ans2, answer3: ans3, answer4: ans4)
         questionList.append(qs2)
         
-        var qs3 = QuestionSet(question: "Do you use the yellow bin to throw away plastic bottles?", answer1: ans1, answer2: ans2)
+        //Question set 3
+        tip = "In Australia There are many local collection programs for different types of e-waste including electronic equipment."
+        ans1 = makeAnswer("No, collect them", boolVal: false)
+        ans2 = makeAnswer("Yes, that's the best solution", boolVal: true)
+        ans3 = makeAnswer("Make a pile of waste in the living room", boolVal: false)
+        ans4 = makeAnswer("Break them in pieces", boolVal: false)
+        ques = "Should mobile phones or computers be recycled?"
+        let qs3 = QuestionSet(tip: tip, question: ques, answer1: ans1, answer2: ans2, answer3: ans3, answer4: ans4)
         questionList.append(qs3)
         
-        var qs4 = QuestionSet(question: "Do you use the yellow bin to throw paper bags?", answer1: ans1, answer2: ans2)
+        //Question set 4
+        tip = "In Australia There are many local collection programs for different types of e-waste including electronic equipment."
+        ans1 = makeAnswer("No, collect them", boolVal: false)
+        ans2 = makeAnswer("Yes, that's the best solution", boolVal: true)
+        ans3 = makeAnswer("Make a pile of waste in the living room", boolVal: false)
+        ans4 = makeAnswer("Break them in pieces", boolVal: false)
+        ques = "Should televisions be recycled?"
+        let qs4 = QuestionSet(tip: tip, question: ques, answer1: ans1, answer2: ans2, answer3: ans3, answer4: ans4)
         questionList.append(qs4)
         
-    }
-    
-    func generateLevel2List()
-    {
-        var ans1 = makeAnswer("Yes", boolVal: true)
-        var ans2 = makeAnswer("No", boolVal: false)
-        var ans3 = makeAnswer("Yes", boolVal: false)
-        var ans4 = makeAnswer("No", boolVal: true)
-        
-        var qs1 = QuestionSet(question: "Is it alright to leave the lights on when you're not home?", answer1: ans3, answer2: ans4)
-        questionList.append(qs1)
-        
-        var qs2 = QuestionSet(question: "Should I use energy saving bulbs?", answer1: ans1, answer2: ans2)
-        questionList.append(qs2)
-        
-        var qs3 = QuestionSet(question: "Should I turn off the heater when I'm going away?", answer1: ans1, answer2: ans2)
-        questionList.append(qs3)
-        
-        var qs4 = QuestionSet(question: "Should I leave the tap open while brushing my teeth?", answer1: ans3, answer2: ans4)
-        questionList.append(qs4)
-        
-        var qs5 = QuestionSet(question: "Should I turn on the the stove just before leaving my house?", answer1: ans3, answer2: ans4)
+        //Question set 5
+        tip = "Australian’s recycling requirements apply to everyone in the state, in both public and private spaces. This includes daycares, schools, public places, businesses, special events, homes and apartments"
+        ans1 = makeAnswer("17 Natural trees", boolVal: true)
+        ans2 = makeAnswer("4,100 kilowatt-hours of electricity", boolVal: true)
+        ans3 = makeAnswer("Both of these answers", boolVal: true)
+        ans4 = makeAnswer("None of these answers", boolVal: false)
+        ques = "Recycling 1 ton of paper saves?"
+        let qs5 = QuestionSet(tip: tip, question: ques, answer1: ans1, answer2: ans2, answer3: ans3, answer4: ans4)
         questionList.append(qs5)
         
     }
-    
-    func generateLevel3List()
-    {
-        var ans1 = makeAnswer("Yes", boolVal: true)
-        var ans2 = makeAnswer("No", boolVal: false)
-        var ans3 = makeAnswer("Yes", boolVal: false)
-        var ans4 = makeAnswer("No", boolVal: true)
-        
-        var qs1 = QuestionSet(question: "Should I waste as much water as possible?", answer1: ans3, answer2: ans4)
-        questionList.append(qs1)
-        
-        var qs2 = QuestionSet(question: "Should I leave the shower on after a shower?", answer1: ans3, answer2: ans4)
-        questionList.append(qs2)
-        
-        var qs3 = QuestionSet(question: "Should I turn off unused electrical appliances?", answer1: ans1, answer2: ans2)
-        questionList.append(qs3)
-        
-        var qs4 = QuestionSet(question: "Should I cut down all the trees in my garden?", answer1: ans3, answer2: ans4)
-        questionList.append(qs4)
-        
-        var qs5 = QuestionSet(question: "Should I plant some trees in my garden?", answer1: ans1, answer2: ans1)
-        questionList.append(qs5)
-        
-    }
-    
-    func generateLevel4List()
-    {
-        var ans1 = makeAnswer("Yes", boolVal: true)
-        var ans2 = makeAnswer("No", boolVal: false)
-        var ans3 = makeAnswer("Yes", boolVal: false)
-        var ans4 = makeAnswer("No", boolVal: true)
-        
-        var qs1 = QuestionSet(question: "Should I water plants regularly in my garden?", answer1: ans1, answer2: ans2)
-        questionList.append(qs1)
-        
-        var qs2 = QuestionSet(question: "Should I help my neighbour's cat stuck in a tree?", answer1: ans1, answer2: ans2)
-        questionList.append(qs2)
-        
-        var qs3 = QuestionSet(question: "Should I keep any plants in a locked room?", answer1: ans3, answer2: ans4)
-        questionList.append(qs3)
-        
-        var qs4 = QuestionSet(question: "Should I collect recyclable items to throw them in the yellow bin?", answer1: ans1, answer2: ans2)
-        questionList.append(qs4)
-        
-        var qs5 = QuestionSet(question: "Should I not use paper unless I really need it?", answer1: ans1, answer2: ans2)
-        questionList.append(qs5)
-        
-        var qs6 = QuestionSet(question: "Should I use the air conditioner during winter?", answer1: ans3, answer2: ans4)
-        questionList.append(qs6)
-        
-    }
-
     
     func makeAnswer(str: String, boolVal: Bool) -> Answer
     {
-        var answer: Answer = Answer(answer: str, correct: boolVal)
+        let answer: Answer = Answer(answer: str, correct: boolVal)
         
         return answer
     }
     
+    func readFile(name: String)
+    {
+        
+        
+    }
+    
     func testList()
     {
-        println("Test method for Level 1 questions")
+        print("Test method for Level 1 questions")
         /*for item in questionList {
             println("Q: " + item.question + " A1: " + item.answer1.answer + " A2: " + item.answer2.answer)
             
         }*/
         
         for i in 0...3 {
-            println("Q: " + questionList[i].question +
+            print("T:" + questionList[i].tip +
+                " Q: " + questionList[i].question +
                 " A1: " + questionList[i].answer1.answer +
-                " A2: " + questionList[i].answer2.answer)
+                " A2: " + questionList[i].answer2.answer +
+                " A3: " + questionList[i].answer3.answer +
+                " A3: " + questionList[i].answer4.answer)
         }
     }
 }

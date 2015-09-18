@@ -72,10 +72,10 @@ class GameScene: SKScene {
         skipButton.setScale(0.5)
         self.addChild(skipButton)*/
         
-        spawnButtons(recycle, width: self.size.width * 0.35, height: self.size.height * 0.7, scale: 0.15, name: "recycle")
+        spawnButtons(paper, width: self.size.width * 0.35, height: self.size.height * 0.7, scale: 0.5, name: "paper")
         spawnButtons(tree, width: self.size.width * 0.6, height: self.size.height * 0.7, scale: 0.25, name: "tree")
         spawnButtons(water, width: self.size.width * 0.35, height: self.size.height * 0.4, scale: 0.3, name: "water")
-        spawnButtons(paper, width: self.size.width * 0.6, height: self.size.height * 0.4, scale: 0.3, name: "paper")
+        spawnButtons(recycle, width: self.size.width * 0.6, height: self.size.height * 0.4, scale: 0.2, name: "recycle")
         
         //Create action for the sprite
         //let moveAction = SKAction.moveTo(CGPoint(x: self.size.width/2, y: nextButton.size.height + 80), duration: 5)
@@ -102,18 +102,69 @@ class GameScene: SKScene {
         //NSUserDefaults.standardUserDefaults().setInteger(1, forKey:"Level")
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    func saveLevel(level: Int){
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(level, forKey: "Level")
+        defaults.synchronize()
+    }
+    
+    func loadLevel1()
+    {
+        let secondScene = Level1Scene(size: self.size)
+        let transition = SKTransition.crossFadeWithDuration(0.5)
+        secondScene.scaleMode = SKSceneScaleMode.AspectFill
+        self.scene!.view?.presentScene(secondScene, transition: transition)
+    }
+    
+    func loadLevel2()
+    {
+        let secondScene = Level2Scene(size: self.size)
+        let transition = SKTransition.crossFadeWithDuration(0.5)
+        secondScene.scaleMode = SKSceneScaleMode.AspectFill
+        self.scene!.view?.presentScene(secondScene, transition: transition)
+    }
+    
+    func loadLevel3()
+    {
+        let secondScene = Level3Scene(size: self.size)
+        let transition = SKTransition.crossFadeWithDuration(0.5)
+        secondScene.scaleMode = SKSceneScaleMode.AspectFill
+        self.scene!.view?.presentScene(secondScene, transition: transition)
+    }
+    
+    func loadLevel4()
+    {
+        let secondScene = Level4Scene(size: self.size)
+        let transition = SKTransition.crossFadeWithDuration(0.5)
+        secondScene.scaleMode = SKSceneScaleMode.AspectFill
+        self.scene!.view?.presentScene(secondScene, transition: transition)
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        var touch = touches as!  Set<UITouch>
-        var location = touch.first!.locationInNode(self)
-        var node = self.nodeAtPoint(location)
+        let touch = touches 
+        let location = touch.first!.locationInNode(self)
+        let node = self.nodeAtPoint(location)
         
-        // If next button is touched, start transition to second scene
-        if (node.name == "skipButton") {
-            var secondScene = Level1Scene(size: self.size)
-            var transition = SKTransition.crossFadeWithDuration(0.5)
-            secondScene.scaleMode = SKSceneScaleMode.AspectFill
-            self.scene!.view?.presentScene(secondScene, transition: transition)
+        if (node.name == "paper")
+        {
+            saveLevel(1)
+            loadLevel1()
+        }
+        else if (node.name == "tree")
+        {
+            saveLevel(2)
+            loadLevel2()
+        }
+        else if (node.name == "water")
+        {
+            saveLevel(3)
+            loadLevel3()
+        }
+        else if (node.name == "recycle")
+        {
+            saveLevel(4)
+            loadLevel4()
         }
         
     }

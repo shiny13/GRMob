@@ -8,12 +8,13 @@
 
 import UIKit
 import SpriteKit
+import AVFoundation
 
 extension SKNode {
     class func unarchiveFromFile(file : String) -> SKNode? {
         if let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks") {
-            var sceneData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil)!
-            var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
+            let sceneData = try! NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe)
+            let archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
             
             archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
             let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! GameScene
@@ -26,6 +27,8 @@ extension SKNode {
 }
 
 class GameViewController: UIViewController {
+    
+    var musicPlayer = AVAudioPlayer()
 
     /*override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +63,16 @@ class GameViewController: UIViewController {
         scene.size = view.bounds.size
         // Show the new scene:
         skView.presentScene(scene)
+        
+        /*let musicUrl = NSBundle.mainBundle().URLForResource("Sound/BackgroundMusic.m4a", withExtension: nil)
+
+        if let url = musicUrl {
+            
+            musicPlayer = AVAudioPlayer(contentsOfURL: url, fileTypeHint: nil)
+            musicPlayer.numberOfLoops = -1
+            musicPlayer.prepareToPlay()
+            musicPlayer.play()
+        }*/
     }
 
     override func shouldAutorotate() -> Bool {
@@ -74,8 +87,8 @@ class GameViewController: UIViewController {
         }
     }*/
     
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.Landscape.rawValue);
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Landscape;
     }
 
     override func didReceiveMemoryWarning() {
