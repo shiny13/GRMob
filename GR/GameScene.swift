@@ -16,7 +16,14 @@ class GameScene: SKScene {
     
     let nextButton: SKSpriteNode = SKSpriteNode(imageNamed: "Next.png")
     let skipButton = SKSpriteNode(imageNamed: "skip.png")
-    var bgImage = SKSpriteNode(imageNamed: "signs_of_spring_2-wallpaper-1024x1024.jpg")
+    let bgImage = SKSpriteNode(imageNamed: "signs_of_spring_2-wallpaper-1024x1024.jpg")
+    let bgAustralia = SKSpriteNode(imageNamed: "Australia-01.png")
+    
+    //Button sprites
+    let recycle:SKSpriteNode = SKSpriteNode(imageNamed: "RecycleBin-01.png")
+    let water:SKSpriteNode = SKSpriteNode(imageNamed: "MrWater-02.png")
+    let tree:SKSpriteNode = SKSpriteNode(imageNamed: "mrTree-02.png")
+    let paper:SKSpriteNode = SKSpriteNode(imageNamed: "MrPaper-02.png")
     
     func spawnBees()
     {
@@ -33,26 +40,46 @@ class GameScene: SKScene {
         bee2.moveLeftRightForever(1.4)
     }
     
+    func spawnButtons(sprite: SKSpriteNode, width: CGFloat, height: CGFloat, scale: CGFloat, name: String)
+    {
+        sprite.position = CGPointMake(width, height)
+        sprite.name = name
+        sprite.zPosition = -5
+        sprite.setScale(scale)
+        self.addChild(sprite)
+    }
+    
     override func didMoveToView(view: SKView) {
         
         // Add the world node as a child of the scene
         self.addChild(world)
         
         bgImage.position = CGPointMake(self.size.width/2, self.size.height/2)
+        bgImage.zPosition = -15
         self.addChild(bgImage)
         
-        nextButton.position = CGPointMake(nextButton.size.width/2, nextButton.size.height/2 + 80)
+        bgAustralia.position = CGPointMake(self.size.width/2, self.size.height/2)
+        bgAustralia.zPosition = -10
+        bgAustralia.setScale(0.4)
+        self.addChild(bgAustralia)
+        
+        /*nextButton.position = CGPointMake(nextButton.size.width/2, nextButton.size.height/2 + 80)
         nextButton.name = "nextButton"
         self.addChild(nextButton)
         
         skipButton.position = CGPointMake(self.size.width/2, skipButton.size.height/2 + 5)
         skipButton.name = "skipButton"
         skipButton.setScale(0.5)
-        self.addChild(skipButton)
+        self.addChild(skipButton)*/
+        
+        spawnButtons(recycle, width: self.size.width * 0.35, height: self.size.height * 0.7, scale: 0.15, name: "recycle")
+        spawnButtons(tree, width: self.size.width * 0.6, height: self.size.height * 0.7, scale: 0.25, name: "tree")
+        spawnButtons(water, width: self.size.width * 0.35, height: self.size.height * 0.4, scale: 0.3, name: "water")
+        spawnButtons(paper, width: self.size.width * 0.6, height: self.size.height * 0.4, scale: 0.3, name: "paper")
         
         //Create action for the sprite
         //let moveAction = SKAction.moveTo(CGPoint(x: self.size.width/2, y: nextButton.size.height + 80), duration: 5)
-        let moveAction = SKAction.moveTo(CGPoint(x:self.size.width/2, y:nextButton.size.height/2 + 80), duration: 1.5)
+        /*let moveAction = SKAction.moveTo(CGPoint(x:self.size.width/2, y:nextButton.size.height/2 + 80), duration: 1.5)
         let scaleAction = SKAction.scaleTo(0.3, duration: 1.5)
         let rotateAction = SKAction.rotateByAngle(-6.28318531, duration: 1.5)
         let scaleAction2 = SKAction.scaleTo(0.5, duration: 1.25)
@@ -67,7 +94,7 @@ class GameScene: SKScene {
         
         // Tell the node to execute the action!
         nextButton.runAction(seq1)
-        //skipButton.runAction(seq2)
+        //skipButton.runAction(seq2)*/
                 
         spawnBees()
         

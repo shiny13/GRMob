@@ -30,6 +30,12 @@
 		3D5ECAD21B988E5000EC34CF /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5ECAD11B988E5000EC34CF /* Checkbox.swift */; };
 		3D5ECAD61B9898AF00EC34CF /* checkbox.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3D5ECAD51B9898AF00EC34CF /* checkbox.atlas */; };
 		3D6BAC851B947ED000EFC06E /* bee.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3D6BAC841B947ED000EFC06E /* bee.atlas */; };
+		3D7002661BAB941D0051D1F8 /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7002651BAB941D0051D1F8 /* Tip.swift */; };
+		3D9E3BEC1BABA6FD004168D3 /* Australia-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9E3BEB1BABA6FD004168D3 /* Australia-01.png */; };
+		3D9E3BEE1BABA892004168D3 /* MrPaper-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9E3BED1BABA892004168D3 /* MrPaper-02.png */; };
+		3D9E3BF01BABA89D004168D3 /* mrTree-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9E3BEF1BABA89D004168D3 /* mrTree-02.png */; };
+		3D9E3BF21BABA8A7004168D3 /* MrWater-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9E3BF11BABA8A7004168D3 /* MrWater-02.png */; };
+		3D9E3BF41BABA8AE004168D3 /* RecycleBin-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9E3BF31BABA8AE004168D3 /* RecycleBin-01.png */; };
 		3DA1EA491B95804B0053DA62 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA1EA481B95804B0053DA62 /* play.png */; };
 		3DA1EA4B1B9583060053DA62 /* playbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3DA1EA4A1B9583060053DA62 /* playbg.jpg */; };
 		3DA1EA4D1B9585C70053DA62 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA1EA4C1B9585C70053DA62 /* arrow.png */; };
@@ -40,6 +46,7 @@
 		3DA1EA591B95B2C90053DA62 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA1EA571B95B2C90053DA62 /* unchecked.png */; };
 		3DF023E01B968CD400262699 /* buybg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3DF023DF1B968CD400262699 /* buybg.jpg */; };
 		3DF023E21B9690D500262699 /* solarpanel.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3DF023E11B9690D500262699 /* solarpanel.jpg */; };
+		3DF153311BAB9A5D00F6E9B0 /* TipSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF153301BAB9A5D00F6E9B0 /* TipSet.swift */; };
 		3DF831AA1B9957E700A218CE /* redcancel1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF831A81B9957E700A218CE /* redcancel1.png */; };
 		3DF831AC1B99582900A218CE /* TipSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF831AB1B99582900A218CE /* TipSprite.swift */; };
 		3DF831B01B995AD800A218CE /* bluepanel1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF831AF1B995AD800A218CE /* bluepanel1.png */; };
@@ -83,6 +90,12 @@
 		3D5ECAD11B988E5000EC34CF /* Checkbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		3D5ECAD51B9898AF00EC34CF /* checkbox.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = checkbox.atlas; sourceTree = "<group>"; };
 		3D6BAC841B947ED000EFC06E /* bee.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bee.atlas; sourceTree = "<group>"; };
+		3D7002651BAB941D0051D1F8 /* Tip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tip.swift; sourceTree = "<group>"; };
+		3D9E3BEB1BABA6FD004168D3 /* Australia-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Australia-01.png"; sourceTree = "<group>"; };
+		3D9E3BED1BABA892004168D3 /* MrPaper-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MrPaper-02.png"; sourceTree = "<group>"; };
+		3D9E3BEF1BABA89D004168D3 /* mrTree-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mrTree-02.png"; sourceTree = "<group>"; };
+		3D9E3BF11BABA8A7004168D3 /* MrWater-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MrWater-02.png"; sourceTree = "<group>"; };
+		3D9E3BF31BABA8AE004168D3 /* RecycleBin-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecycleBin-01.png"; sourceTree = "<group>"; };
 		3DA1EA481B95804B0053DA62 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		3DA1EA4A1B9583060053DA62 /* playbg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = playbg.jpg; sourceTree = "<group>"; };
 		3DA1EA4C1B9585C70053DA62 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
@@ -93,6 +106,7 @@
 		3DA1EA571B95B2C90053DA62 /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
 		3DF023DF1B968CD400262699 /* buybg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = buybg.jpg; sourceTree = "<group>"; };
 		3DF023E11B9690D500262699 /* solarpanel.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = solarpanel.jpg; sourceTree = "<group>"; };
+		3DF153301BAB9A5D00F6E9B0 /* TipSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipSet.swift; sourceTree = "<group>"; };
 		3DF831A81B9957E700A218CE /* redcancel1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redcancel1.png; sourceTree = "<group>"; };
 		3DF831AB1B99582900A218CE /* TipSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipSprite.swift; sourceTree = "<group>"; };
 		3DF831AF1B995AD800A218CE /* bluepanel1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluepanel1.png; sourceTree = "<group>"; };
@@ -119,6 +133,11 @@
 		3D2EC1731B938CB800DAF2CB = {
 			isa = PBXGroup;
 			children = (
+				3D9E3BF31BABA8AE004168D3 /* RecycleBin-01.png */,
+				3D9E3BF11BABA8A7004168D3 /* MrWater-02.png */,
+				3D9E3BEF1BABA89D004168D3 /* mrTree-02.png */,
+				3D9E3BED1BABA892004168D3 /* MrPaper-02.png */,
+				3D9E3BEB1BABA6FD004168D3 /* Australia-01.png */,
 				3DF831AF1B995AD800A218CE /* bluepanel1.png */,
 				3DF831A81B9957E700A218CE /* redcancel1.png */,
 				3DF023E11B9690D500262699 /* solarpanel.jpg */,
@@ -204,6 +223,7 @@
 				3D5ECACD1B9861E600EC34CF /* Ground.swift */,
 				3D5ECACF1B98774E00EC34CF /* Background.swift */,
 				3D5ECAD11B988E5000EC34CF /* Checkbox.swift */,
+				3D7002651BAB941D0051D1F8 /* Tip.swift */,
 			);
 			name = Sprite;
 			sourceTree = "<group>";
@@ -214,6 +234,7 @@
 				3DA1EA511B958B7C0053DA62 /* Answer.swift */,
 				3DA1EA4F1B958B6E0053DA62 /* QuestionSet.swift */,
 				3DA1EA531B958E8A0053DA62 /* QuestionSetList.swift */,
+				3DF153301BAB9A5D00F6E9B0 /* TipSet.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -304,12 +325,15 @@
 				3D6BAC851B947ED000EFC06E /* bee.atlas in Resources */,
 				3DF831AA1B9957E700A218CE /* redcancel1.png in Resources */,
 				3D2EC1B41B93BC6700DAF2CB /* paper1.jpg in Resources */,
+				3D9E3BF21BABA8A7004168D3 /* MrWater-02.png in Resources */,
+				3D9E3BF01BABA89D004168D3 /* mrTree-02.png in Resources */,
 				3DF831B01B995AD800A218CE /* bluepanel1.png in Resources */,
 				3D2EC1901B938CB900DAF2CB /* LaunchScreen.xib in Resources */,
 				3DA1EA591B95B2C90053DA62 /* unchecked.png in Resources */,
 				3D5ECACC1B9861A100EC34CF /* ground.atlas in Resources */,
 				3D2EC18D1B938CB900DAF2CB /* Images.xcassets in Resources */,
 				3DA1EA4D1B9585C70053DA62 /* arrow.png in Resources */,
+				3D9E3BF41BABA8AE004168D3 /* RecycleBin-01.png in Resources */,
 				3DA1EA491B95804B0053DA62 /* play.png in Resources */,
 				3D2EC1AC1B93A6A100DAF2CB /* skip.png in Resources */,
 				3D2EC1841B938CB900DAF2CB /* GameScene.sks in Resources */,
@@ -319,6 +343,8 @@
 				3DA1EA581B95B2C90053DA62 /* checked.png in Resources */,
 				3D2EC18B1B938CB900DAF2CB /* Main.storyboard in Resources */,
 				3D2EC1A71B93A0A300DAF2CB /* signs_of_spring_2-wallpaper-1024x1024.jpg in Resources */,
+				3D9E3BEC1BABA6FD004168D3 /* Australia-01.png in Resources */,
+				3D9E3BEE1BABA892004168D3 /* MrPaper-02.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DF153311BAB9A5D00F6E9B0 /* TipSet.swift in Sources */,
 				3DA1EA501B958B6E0053DA62 /* QuestionSet.swift in Sources */,
 				3D5ECAD01B98774E00EC34CF /* Background.swift in Sources */,
 				3D5ECAC71B9820D300EC34CF /* GameSprite.swift in Sources */,
@@ -348,6 +375,7 @@
 				3D5962751B94F54C0049FEEF /* Level1Scene.swift in Sources */,
 				3DA1EA541B958E8A0053DA62 /* QuestionSetList.swift in Sources */,
 				3D2EC1821B938CB900DAF2CB /* AppDelegate.swift in Sources */,
+				3D7002661BAB941D0051D1F8 /* Tip.swift in Sources */,
 				3DF831AC1B99582900A218CE /* TipSprite.swift in Sources */,
 				3D5ECAD21B988E5000EC34CF /* Checkbox.swift in Sources */,
 			);

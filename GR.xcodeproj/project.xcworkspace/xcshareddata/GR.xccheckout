@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>7CCF58CE-F808-4403-B2C1-97BD7DC1E040</string>
 	<key>IDESourceControlProjectName</key>
-	<string>GR</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>57AC0E452B75620B08941B13AEEDED613283CE41</key>
 		<string>https://github.com/shiny13/GRMob.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>GR.xcodeproj</string>
+	<string>GR.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>57AC0E452B75620B08941B13AEEDED613283CE41</key>

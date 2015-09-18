@@ -158,8 +158,10 @@ class Level1Scene: SKScene {
         let tipSize = CGSize(width: 400, height: 300)
         
         //Spawn the tip
-        tipSprite.spawn(world, position: tipPosition, size: tipSize)
+        tipSprite.spawn(world, imageName: "bluepanel1.png", zPosition: -4, tip: "The world is in danger")
         tipSprite.runSpawnAction()
+        
+        
     }
     
     //MARK: method to load scene
