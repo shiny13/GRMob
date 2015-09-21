@@ -87,7 +87,7 @@ class Level1Scene: SKScene {
         qLabel.text = quesSet.question as String
         qLabel.fontSize = 25
         qLabel.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
-        qLabel.position = CGPointMake(self.size.width/2, self.size.height * 0.92)
+        qLabel.position = CGPointMake(self.size.width/2, self.size.height * 0.89)
         self.addChild(qLabel)
         
         //let questionScale = SKAction.scaleTo(1, duration: 1.5)
@@ -97,25 +97,25 @@ class Level1Scene: SKScene {
         answer1.fontSize = 25
         answer1.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
         
-        answer1.position = CGPointMake(self.size.width * 0.4, self.size.height * 0.83)
+        answer1.position = CGPointMake(self.size.width * 0.45, self.size.height * 0.83)
         self.addChild(answer1)
         
         answer2.text = quesSet.answer2.answer as String
         answer2.fontSize = 25
         answer2.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
-        answer2.position = CGPointMake(self.size.width * 0.4, self.size.height * 0.74)
+        answer2.position = CGPointMake(self.size.width * 0.45, self.size.height * 0.74)
         self.addChild(answer2)
         
         answer3.text = quesSet.answer3.answer as String
         answer3.fontSize = 25
         answer3.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
-        answer3.position = CGPointMake(self.size.width * 0.4, self.size.height * 0.65)
+        answer3.position = CGPointMake(self.size.width * 0.45, self.size.height * 0.65)
         self.addChild(answer3)
         
         answer4.text = quesSet.answer4.answer as String
         answer4.fontSize = 25
         answer4.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
-        answer4.position = CGPointMake(self.size.width * 0.4, self.size.height * 0.56)
+        answer4.position = CGPointMake(self.size.width * 0.45, self.size.height * 0.56)
         self.addChild(answer4)
         
         scoreLabel.text = "Score: \(score)"
@@ -156,7 +156,7 @@ class Level1Scene: SKScene {
         self.menuButton.name = "menu"
         self.addChild(menuButton)
         
-        nextButton.position = CGPointMake(self.size.width * 0.8, nextButton.size.height * 0.25)
+        nextButton.position = CGPointMake(self.size.width * 0.9, nextButton.size.height * 0.3)
         nextButton.setScale(0.2)
         self.nextButton.name = "next"
         self.addChild(nextButton)
@@ -223,24 +223,38 @@ class Level1Scene: SKScene {
     
     func wrongAnswerEffect()
     {
-        switch counter
-        {
-            case 0: let birds:Level1Birds = spriteEffects[counter] as! Level1Birds
-                    birds.removeAnimation(self.size)
-                    break;
-            case 1: let clouds:Level1Clouds = spriteEffects[counter] as! Level1Clouds
-                    clouds.removeAnimation(self.size)
-                    break;
-            case 2: let grass:Level1Grass = spriteEffects[counter] as! Level1Grass
-                    grass.removeAnimation(self.size)
-                    break;
-            case 3: let horses:Level1Horses = spriteEffects[counter] as! Level1Horses
-                    horses.removeAnimation(self.size)
-                    break;
-            default: break
-        }
-
+        let wrong = SKSpriteNode (imageNamed: "wrong-answer.png")
+        wrong.position = CGPointMake(0 - wrong.size.width, self.size.height * 0.5)
+        wrong.setScale(0.75)
+        wrong.zPosition = -10
+        self.addChild(wrong)
+        
+        let moveAction = SKAction.moveTo(CGPoint(x: self.size.width * 0.5, y: self.size.height * 0.5), duration: 0.75)
+        let moveAction2 = SKAction.moveTo(CGPoint(x: self.size.width + wrong.size.width , y: self.size.height * 0.5), duration: 0.75)
+        let wait = SKAction.waitForDuration(3.0)
+        let seq = SKAction.sequence([moveAction, wait, moveAction2])
+        
+        wrong.runAction(seq)
+        wrong.removeFromParent()
     }
+    
+    func levelCompletedEffect()
+    {
+        let completed = SKSpriteNode (imageNamed: "levelcompleted.png")
+        completed.position = CGPointMake(0 - completed.size.width, self.size.height * 0.5)
+        completed.setScale(0.75)
+        completed.zPosition = -10
+        self.addChild(completed)
+        
+        let moveAction = SKAction.moveTo(CGPoint(x: self.size.width * 0.5, y: self.size.height * 0.5), duration: 0.75)
+        let wait = SKAction.waitForDuration(4.5)
+        let wait2 = SKAction.waitForDuration(1.0)
+        let seq = SKAction.sequence([wait, moveAction, wait2])
+        
+        completed.runAction(seq)
+        completed.removeFromParent()
+    }
+
     
     //Mark: Tip Sprite
     func generateTipSprite() {
@@ -260,23 +274,23 @@ class Level1Scene: SKScene {
         let counterSprite4: SKSpriteNode = SKSpriteNode( imageNamed: "Paper-01.png")
         let counterSprite5: SKSpriteNode = SKSpriteNode( imageNamed: "Paper-01.png")
         
-        counterSprite1.position = CGPointMake(self.size.width * 0.15, self.size.height * 0.96)
+        counterSprite1.position = CGPointMake(self.size.width * 0.15, self.size.height * 0.97)
         counterSprite1.setScale(0.08)
         self.addChild(counterSprite1)
         
-        counterSprite2.position = CGPointMake(self.size.width * 0.18, self.size.height * 0.96)
+        counterSprite2.position = CGPointMake(self.size.width * 0.18, self.size.height * 0.97)
         counterSprite2.setScale(0.08)
         self.addChild(counterSprite2)
         
-        counterSprite3.position = CGPointMake(self.size.width * 0.21, self.size.height * 0.96)
+        counterSprite3.position = CGPointMake(self.size.width * 0.21, self.size.height * 0.97)
         counterSprite3.setScale(0.08)
         self.addChild(counterSprite3)
 
-        counterSprite4.position = CGPointMake(self.size.width * 0.24, self.size.height * 0.96)
+        counterSprite4.position = CGPointMake(self.size.width * 0.24, self.size.height * 0.97)
         counterSprite4.setScale(0.08)
         self.addChild(counterSprite4)
 
-        counterSprite5.position = CGPointMake(self.size.width * 0.27, self.size.height * 0.96)
+        counterSprite5.position = CGPointMake(self.size.width * 0.27, self.size.height * 0.97)
         counterSprite5.setScale(0.08)
         self.addChild(counterSprite5)
         
@@ -292,7 +306,7 @@ class Level1Scene: SKScene {
     
     func counterFadeAction()
     {
-        let fadeAction = SKAction.fadeAlphaTo(1, duration: 2)
+        let fadeAction = SKAction.fadeAlphaTo(1, duration: 1.25)
         counterHolder[counter].runAction(fadeAction)
     }
     
@@ -348,13 +362,6 @@ class Level1Scene: SKScene {
         print("Score before transition: \(score)")
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setInteger(self.score, forKey: "Score")
-        defaults.synchronize()
-    }
-    
-    func saveLevel(){
-        print("Level before transition: \(level)")
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(self.level, forKey: "Level")
         defaults.synchronize()
     }
     
@@ -455,6 +462,7 @@ class Level1Scene: SKScene {
                 playSound(1)
                 
             } else {
+                wrongAnswerEffect()
                 playSound(0)
             }
             
@@ -463,19 +471,9 @@ class Level1Scene: SKScene {
             print("Count val: \(self.quesList.questionList.count)")
             if counter >= self.quesList.questionList.count {
                 saveScore()
-                
-                if self.level < 4 {
-                    self.level++
-                    saveLevel()
-                    let newScene = BuyItemScene(size: self.size)
-                    loadScene(newScene)
-                } else {
-                    self.level = 1
-                    saveLevel()
-                    
-                    let newScene = GameScene(size: self.size)
-                    loadScene(newScene)
-                }
+                levelCompletedEffect()
+                let newScene = GameScene(size: self.size)
+                loadScene(newScene)
                 
             }
             else {

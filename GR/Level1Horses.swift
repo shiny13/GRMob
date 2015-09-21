@@ -22,17 +22,17 @@ class Level1Horses: SKSpriteNode, EffectSprite {
         
         horse1.position = CGPointMake(-200, -200)
         horse1.setScale(0.2)
-        horse1.zPosition = -15
+        horse1.zPosition = -10
         self.addChild(horse1)
         
         horse2.position = CGPointMake(50, -200)
         horse2.setScale(0.05)
-        horse2.zPosition = -15
+        horse2.zPosition = -10
         self.addChild(horse2)
         
         horse3.position = CGPointMake(300, -200)
         horse3.setScale(0.1)
-        horse3.zPosition = -15
+        horse3.zPosition = -10
         self.addChild(horse3)
         
         //playCreateAnimation(canvasSize)

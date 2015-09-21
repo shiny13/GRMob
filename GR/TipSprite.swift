@@ -14,7 +14,7 @@ class TipSprite: SKSpriteNode {
     var cancelAction = SKAction()
     
     //A constant background node size
-    let backgroundSize = CGSize(width: 384, height: 288)
+    let backgroundSize = CGSize(width: 1000, height: 60)
     let label: SKLabelNode = SKLabelNode(fontNamed: "Helvetica")
     
     func spawn(parentNode: SKNode, imageName:String, zPosition: CGFloat, tip: String) {
@@ -22,7 +22,7 @@ class TipSprite: SKSpriteNode {
         //Anchor position from the bottom left:
         self.anchorPoint = CGPointZero
         //Start background on top of the ice
-        self.position = CGPoint(x: -250, y: 0)
+        self.position = CGPoint(x: -300, y: 15)
         //To control the order of the background
         self.zPosition = zPosition
         //Add this background to the parent node
@@ -41,8 +41,8 @@ class TipSprite: SKSpriteNode {
         
         label.text = tip
         label.fontSize = 20
-        label.fontColor = SKColor(red: 0.76, green: 0.42, blue: 0.18, alpha: 1)
-        label.position = CGPointMake(backgroundSize.width * 0.5, backgroundSize.height * 0.8)
+        label.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
+        label.position = CGPointMake(backgroundSize.width * 0.5, backgroundSize.height * 0.5)
         self.addChild(label)
         
     }

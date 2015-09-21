@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-
+import AVFoundation
 
 class GameScene: SKScene {
     
@@ -49,6 +49,31 @@ class GameScene: SKScene {
         self.addChild(sprite)
     }
     
+    func playVideo()
+    {
+        var tvMaskNode = SKSpriteNode()
+        tvMaskNode.size = self.size
+        //SKCropNode *cropNode = [SKCropNode node];
+        //cropNode.maskNode = tvMaskNode;
+        // 3
+       /* NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"BookTrailer" ofType:@"m4v"]];
+        var fileURL = NSURL(fileURLWithPath: "videos/animation1_v3.mp4")
+        var player = [AVPlayer playerWithURL: fileURL];
+        // 4
+        _videoNode = [[SKVideoNode alloc] initWithAVPlayer:_player];
+        _videoNode.size = CGRectInset(frame,frame.size.width * .15,frame.size.height * .27).size;
+        _videoNode.position = CGPointMake(-frame.size.width * .1, -frame.size.height * .06);
+        // 5
+        [cropNode addChild:_videoNode];
+        [self addChild:cropNode];
+        // 6
+        self.position = frame.origin; 
+        self.size = frame.size;
+        // 7
+        _player.volume = 0.0;
+        [_videoNode play]; */
+    }
+    
     override func didMoveToView(view: SKView) {
         
         // Add the world node as a child of the scene
@@ -72,8 +97,8 @@ class GameScene: SKScene {
         skipButton.setScale(0.5)
         self.addChild(skipButton)*/
         
-        spawnButtons(paper, width: self.size.width * 0.35, height: self.size.height * 0.7, scale: 0.5, name: "paper")
-        spawnButtons(tree, width: self.size.width * 0.6, height: self.size.height * 0.7, scale: 0.25, name: "tree")
+        spawnButtons(tree, width: self.size.width * 0.35, height: self.size.height * 0.7, scale: 0.3, name: "tree")
+        spawnButtons(paper, width: self.size.width * 0.6, height: self.size.height * 0.7, scale: 0.35, name: "paper")
         spawnButtons(water, width: self.size.width * 0.35, height: self.size.height * 0.4, scale: 0.3, name: "water")
         spawnButtons(recycle, width: self.size.width * 0.6, height: self.size.height * 0.4, scale: 0.2, name: "recycle")
         
@@ -146,12 +171,12 @@ class GameScene: SKScene {
         let location = touch.first!.locationInNode(self)
         let node = self.nodeAtPoint(location)
         
-        if (node.name == "paper")
+        if (node.name == "tree")
         {
             saveLevel(1)
             loadLevel1()
         }
-        else if (node.name == "tree")
+        else if (node.name == "paper")
         {
             saveLevel(2)
             loadLevel2()

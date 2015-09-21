@@ -17,13 +17,20 @@ class Level3Scene: SKScene {
     var score: Int
     var touch: Int
     var level: Int
+    var correct: Bool = false
     let menuButton = SKSpriteNode (imageNamed: "Menu2.png")
     var nextButton = SKSpriteNode (imageNamed: "arrow.png")
     var check1: SKSpriteNode = SKSpriteNode (imageNamed: "unchecked.png")
     var check2: SKSpriteNode = SKSpriteNode (imageNamed: "unchecked.png")
+    var check3: SKSpriteNode = SKSpriteNode (imageNamed: "unchecked.png")
+    var check4: SKSpriteNode = SKSpriteNode (imageNamed: "unchecked.png")
+    var counterHolder = [SKSpriteNode]()
+    var spriteEffects = [SKSpriteNode]()
     var qLabel = SKLabelNode(fontNamed:"Cochin")
     var answer1 = SKLabelNode(fontNamed:"Cochin")
     var answer2 = SKLabelNode(fontNamed:"Cochin")
+    var answer3 = SKLabelNode(fontNamed:"Cochin")
+    var answer4 = SKLabelNode(fontNamed:"Cochin")
     var scoreLabel = SKLabelNode(fontNamed: "Thonburi")
     let tipSprite = TipSprite()
     
@@ -49,20 +56,86 @@ class Level3Scene: SKScene {
     //MARK: generate the ground
     func generateBackground()
     {
-        self.backgroundColor = UIColor(red: 0.29, green: 0.44, blue:
-            0.14, alpha: 1.0);
+        self.backgroundColor = UIColor(red: 0, green: 0.96, blue:
+            1.0, alpha: 1.0);
         
-        let background = SKSpriteNode(imageNamed: "MapEnvir2-05.png")
+        let background = SKSpriteNode(imageNamed: "MapEnvir2-10.png")
         background.position = CGPointMake(self.size.width/2, self.size.height/2)
         background.setScale(0.5)
         background.zPosition = -20
         self.addChild(background)
     }
     
+    //MARK: Generate Labels
+    func refreshLabels(qSet: QuestionSet)
+    {
+        tipSprite.changeTip(qSet.tip)
+        qLabel.text = qSet.question as String
+        answer1.text = qSet.answer1.answer as String
+        answer2.text = qSet.answer2.answer as String
+        answer3.text = qSet.answer3.answer as String
+        answer4.text = qSet.answer4.answer as String
+        scoreLabel.text = "Score: \(score)"
+        counterFadeAction()
+    }
+    
+    func drawLabelSprite(quesSet: QuestionSet)
+    {
+        tipSprite.changeTip(quesSet.tip)
+        
+        qLabel.text = quesSet.question as String
+        qLabel.fontSize = 25
+        qLabel.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
+        qLabel.position = CGPointMake(self.size.width/2, self.size.height * 0.87)
+        self.addChild(qLabel)
+        
+        //let questionScale = SKAction.scaleTo(1, duration: 1.5)
+        //qLabel.runAction(questionScale)
+        
+        answer1.text = quesSet.answer1.answer as String
+        answer1.fontSize = 25
+        answer1.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
+        
+        answer1.position = CGPointMake(self.size.width * 0.45, self.size.height * 0.8)
+        self.addChild(answer1)
+        
+        answer2.text = quesSet.answer2.answer as String
+        answer2.fontSize = 25
+        answer2.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
+        answer2.position = CGPointMake(self.size.width * 0.45, self.size.height * 0.71)
+        self.addChild(answer2)
+        
+        answer3.text = quesSet.answer3.answer as String
+        answer3.fontSize = 25
+        answer3.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
+        answer3.position = CGPointMake(self.size.width * 0.45, self.size.height * 0.62)
+        self.addChild(answer3)
+        
+        answer4.text = quesSet.answer4.answer as String
+        answer4.fontSize = 25
+        answer4.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
+        answer4.position = CGPointMake(self.size.width * 0.45, self.size.height * 0.52)
+        self.addChild(answer4)
+        
+        scoreLabel.text = "Score: \(score)"
+        scoreLabel.fontSize = 25
+        scoreLabel.fontColor = SKColor(red: 0.21, green: 0.35, blue: 0.42, alpha: 1)
+        scoreLabel.position = CGPointMake(self.size.width * 0.85, self.size.height * 0.95)
+        self.addChild(scoreLabel)
+        
+        let wait = SKAction.waitForDuration(1)
+        let fadeAction = SKAction.fadeAlphaTo(1, duration: 2)
+        
+        let seq = SKAction.sequence([wait, fadeAction])
+        counterHolder[counter].runAction(seq)
+        
+    }
+    
     //MARK: generate all sprites
     
     func generateQuestion()
     {
+        self.correct = false
         self.touch = 0
         print("Counter \(counter)")
         let quesSet: QuestionSet = quesList.questionList[self.counter]
@@ -82,72 +155,158 @@ class Level3Scene: SKScene {
         self.menuButton.name = "menu"
         self.addChild(menuButton)
         
-        nextButton.position = CGPointMake(self.size.width * 0.8, nextButton.size.height * 0.25)
+        nextButton.position = CGPointMake(self.size.width * 0.9, nextButton.size.height * 0.3)
         nextButton.setScale(0.2)
         self.nextButton.name = "next"
         self.addChild(nextButton)
     }
     
-    func refreshLabels(qSet: QuestionSet)
-    {
-        qLabel.text = qSet.question as String
-        answer1.text = qSet.answer1.answer as String
-        answer2.text = qSet.answer2.answer as String
-        scoreLabel.text = "Score: \(score)"
-    }
-    
-    func drawLabelSprite(quesSet: QuestionSet)
-    {
-        qLabel.text = quesSet.question as String
-        qLabel.fontSize = 40
-        qLabel.fontColor = SKColor(red: 0.33, green: 0.42, blue: 0.18, alpha: 1)
-        qLabel.position = CGPointMake(self.size.width/2, self.size.height * 0.82)
-        self.addChild(qLabel)
-        
-        //let questionScale = SKAction.scaleTo(1, duration: 1.5)
-        //qLabel.runAction(questionScale)
-        
-        answer1.text = quesSet.answer1.answer as String
-        answer1.fontSize = 40
-        answer1.fontColor = SKColor(red: 0.33, green: 0.42, blue: 0.18, alpha: 1)
-        answer1.position = CGPointMake(self.size.width * 0.35, self.size.height * 0.73)
-        self.addChild(answer1)
-        
-        answer2.text = quesSet.answer2.answer as String
-        answer2.fontSize = 40
-        answer2.fontColor = SKColor(red: 0.33, green: 0.42, blue: 0.18, alpha: 1)
-        answer2.position = CGPointMake(self.size.width * 0.35, self.size.height * 0.63)
-        self.addChild(answer2)
-        
-        scoreLabel.text = "Score: \(score)"
-        scoreLabel.fontSize = 30
-        scoreLabel.fontColor = SKColor(red: 0.89, green: 0.44, blue: 0.10, alpha: 1)
-        scoreLabel.position = CGPointMake(self.size.width * 0.85, self.size.height * 0.95)
-        self.addChild(scoreLabel)
-        
-    }
-    
     func generateCheckboxes()
     {
-        self.check1.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.74)
+        self.check1.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.81)
         self.check1.setScale(0.15)
         self.check1.name = "check1"
         self.addChild(self.check1)
         
-        self.check2.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.65)
+        self.check2.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.72)
         self.check2.setScale(0.15)
         self.check2.name = "check2"
         self.addChild(self.check2)
         
+        self.check3.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.63)
+        self.check3.setScale(0.15)
+        self.check3.name = "check3"
+        self.addChild(self.check3)
+        
+        self.check4.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.54)
+        self.check4.setScale(0.15)
+        self.check4.name = "check4"
+        self.addChild(self.check4)
+        
     }
     
+    //Mark: Visual Effect Sprite
+    func generateEffectSprites()
+    {
+        let birds = Level1Birds()
+        birds.spawn(world, canvasSize: self.size)
+        let clouds = Level1Clouds()
+        clouds.spawn(world, canvasSize: self.size)
+        let grass = Level1Grass()
+        grass.spawn(world, canvasSize: self.size)
+        let horses = Level1Horses()
+        horses.spawn(world, canvasSize: self.size)
+        
+        spriteEffects = [birds, clouds, grass, horses]
+    }
+    
+    func correctAnswerEffect()
+    {
+        switch counter
+        {
+        case 0: let birds:Level1Birds = spriteEffects[counter] as! Level1Birds
+        birds.playCreateAnimation(self.size)
+        break;
+        case 1: let clouds:Level1Clouds = spriteEffects[counter] as! Level1Clouds
+        clouds.playCreateAnimation(self.size)
+        break;
+        case 2: let grass:Level1Grass = spriteEffects[counter] as! Level1Grass
+        grass.playCreateAnimation(self.size)
+        break;
+        case 3: let horses:Level1Horses = spriteEffects[counter] as! Level1Horses
+        horses.playCreateAnimation(self.size)
+        break;
+        default: break
+        }
+    }
+    
+    func wrongAnswerEffect()
+    {
+        let wrong = SKSpriteNode (imageNamed: "wrong-answer.png")
+        wrong.position = CGPointMake(0 - wrong.size.width, self.size.height * 0.5)
+        wrong.setScale(0.75)
+        wrong.zPosition = -10
+        self.addChild(wrong)
+        
+        let moveAction = SKAction.moveTo(CGPoint(x: self.size.width * 0.5, y: self.size.height * 0.5), duration: 0.75)
+        let moveAction2 = SKAction.moveTo(CGPoint(x: self.size.width + wrong.size.width , y: self.size.height * 0.5), duration: 0.75)
+        let wait = SKAction.waitForDuration(3.0)
+        let seq = SKAction.sequence([moveAction, wait, moveAction2])
+        
+        wrong.runAction(seq)
+        wrong.removeFromParent()
+    }
+    
+    func levelCompletedEffect()
+    {
+        let completed = SKSpriteNode (imageNamed: "levelcompleted.png")
+        completed.position = CGPointMake(0 - completed.size.width, self.size.height * 0.5)
+        completed.setScale(0.75)
+        completed.zPosition = -10
+        self.addChild(completed)
+        
+        let moveAction = SKAction.moveTo(CGPoint(x: self.size.width * 0.5, y: self.size.height * 0.5), duration: 0.75)
+        let wait = SKAction.waitForDuration(4.5)
+        let wait2 = SKAction.waitForDuration(1.0)
+        let seq = SKAction.sequence([wait, moveAction, wait2])
+        
+        completed.runAction(seq)
+        completed.removeFromParent()
+    }
+    
+    
+    //Mark: Tip Sprite
     func generateTipSprite() {
         
         //Spawn the tip
         tipSprite.spawn(world, imageName: "palette.png", zPosition: -4, tip: "The world is in danger")
         tipSprite.runSpawnAction()
         
+    }
+    
+    //MARK: Question Counter Sprite Methods
+    func generateCounterSprite()
+    {
+        let counterSprite1: SKSpriteNode = SKSpriteNode( imageNamed: "Paper-01.png")
+        let counterSprite2: SKSpriteNode = SKSpriteNode( imageNamed: "Paper-01.png")
+        let counterSprite3: SKSpriteNode = SKSpriteNode( imageNamed: "Paper-01.png")
+        let counterSprite4: SKSpriteNode = SKSpriteNode( imageNamed: "Paper-01.png")
+        let counterSprite5: SKSpriteNode = SKSpriteNode( imageNamed: "Paper-01.png")
         
+        counterSprite1.position = CGPointMake(self.size.width * 0.15, self.size.height * 0.97)
+        counterSprite1.setScale(0.08)
+        self.addChild(counterSprite1)
+        
+        counterSprite2.position = CGPointMake(self.size.width * 0.18, self.size.height * 0.97)
+        counterSprite2.setScale(0.08)
+        self.addChild(counterSprite2)
+        
+        counterSprite3.position = CGPointMake(self.size.width * 0.21, self.size.height * 0.97)
+        counterSprite3.setScale(0.08)
+        self.addChild(counterSprite3)
+        
+        counterSprite4.position = CGPointMake(self.size.width * 0.24, self.size.height * 0.97)
+        counterSprite4.setScale(0.08)
+        self.addChild(counterSprite4)
+        
+        counterSprite5.position = CGPointMake(self.size.width * 0.27, self.size.height * 0.97)
+        counterSprite5.setScale(0.08)
+        self.addChild(counterSprite5)
+        
+        counterHolder = [counterSprite1, counterSprite2, counterSprite3, counterSprite4, counterSprite5]
+        
+        let fadeAction = SKAction.fadeAlphaTo(0.2, duration: 0.001)
+        counterSprite1.runAction(fadeAction)
+        counterSprite2.runAction(fadeAction)
+        counterSprite3.runAction(fadeAction)
+        counterSprite4.runAction(fadeAction)
+        counterSprite5.runAction(fadeAction)
+    }
+    
+    func counterFadeAction()
+    {
+        let fadeAction = SKAction.fadeAlphaTo(1, duration: 1.25)
+        counterHolder[counter].runAction(fadeAction)
     }
     
     //MARK: method to load scene
@@ -164,12 +323,12 @@ class Level3Scene: SKScene {
         
         quesList = QuestionSetList(level: level)
         generateBackground()
-        //generateGround()
+        generateTipSprite()
+        generateCounterSprite()
         generateQuestion()
         generateButton()
         generateCheckboxes()
-        generateTipSprite()
-        
+        generateEffectSprites()
     }
     
     //MARK: Load NSUserDefaults values
@@ -205,13 +364,6 @@ class Level3Scene: SKScene {
         defaults.synchronize()
     }
     
-    func saveLevel(){
-        print("Level before transition: \(level)")
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(self.level, forKey: "Level")
-        defaults.synchronize()
-    }
-    
     //MARK: Label Effects
     func tryAgainEffect()
     {
@@ -242,9 +394,12 @@ class Level3Scene: SKScene {
         if node.name == "check1" {
             self.check1.texture = SKTexture(imageNamed: "checked.png")
             self.check2.texture = SKTexture(imageNamed: "unchecked.png")
+            self.check3.texture = SKTexture(imageNamed: "unchecked.png")
+            self.check4.texture = SKTexture(imageNamed: "unchecked.png")
             
             if self.touch < 1 && quesSet.answer1.correct == true {
                 self.score += 1000
+                self.correct = true
                 print("Touch Began Score: \(score)")
             }
             
@@ -255,9 +410,43 @@ class Level3Scene: SKScene {
         if node.name == "check2" {
             self.check1.texture = SKTexture(imageNamed: "unchecked.png")
             self.check2.texture = SKTexture(imageNamed: "checked.png")
+            self.check3.texture = SKTexture(imageNamed: "unchecked.png")
+            self.check4.texture = SKTexture(imageNamed: "unchecked.png")
             
             if self.touch < 1 && quesSet.answer2.correct == true {
                 self.score += 1000
+                self.correct = true
+                print("Touch Began Score: \(score)")
+            }
+            
+            self.touch++
+        }
+        
+        if node.name == "check3" {
+            self.check1.texture = SKTexture(imageNamed: "unchecked.png")
+            self.check2.texture = SKTexture(imageNamed: "unchecked.png")
+            self.check3.texture = SKTexture(imageNamed: "checked.png")
+            self.check4.texture = SKTexture(imageNamed: "unchecked.png")
+            
+            if self.touch < 1 && quesSet.answer3.correct == true {
+                self.score += 1000
+                self.correct = true
+                print("Touch Began Score: \(score)")
+            }
+            
+            self.touch++
+            
+        }
+        
+        if node.name == "check4" {
+            self.check1.texture = SKTexture(imageNamed: "unchecked.png")
+            self.check2.texture = SKTexture(imageNamed: "unchecked.png")
+            self.check3.texture = SKTexture(imageNamed: "unchecked.png")
+            self.check4.texture = SKTexture(imageNamed: "checked.png")
+            
+            if self.touch < 1 && quesSet.answer4.correct == true {
+                self.score += 1000
+                self.correct = true
                 print("Touch Began Score: \(score)")
             }
             
@@ -266,23 +455,24 @@ class Level3Scene: SKScene {
         
         if node.name == "next" {
             
+            if self.correct == true
+            {
+                correctAnswerEffect()
+                playSound(1)
+                
+            } else {
+                wrongAnswerEffect()
+                playSound(0)
+            }
+            
             self.counter++
             
             print("Count val: \(self.quesList.questionList.count)")
             if counter >= self.quesList.questionList.count {
                 saveScore()
-                
-                if self.level < 4 {
-                    self.level++
-                    saveLevel()
-                    let newScene = BuyItemScene(size: self.size)
-                    loadScene(newScene)
-                } else {
-                    self.level = 1
-                    saveLevel()
-                    let newScene = GameScene(size: self.size)
-                    loadScene(newScene)
-                }
+                levelCompletedEffect()
+                let newScene = GameScene(size: self.size)
+                loadScene(newScene)
                 
             }
             else {
@@ -295,6 +485,8 @@ class Level3Scene: SKScene {
                 generateQuestion()
                 self.check1.texture = SKTexture(imageNamed: "unchecked.png")
                 self.check2.texture = SKTexture(imageNamed: "unchecked.png")
+                self.check3.texture = SKTexture(imageNamed: "unchecked.png")
+                self.check4.texture = SKTexture(imageNamed: "unchecked.png")
             }
         }
         
@@ -304,6 +496,20 @@ class Level3Scene: SKScene {
             loadScene(newScene)
         }
         
+    }
+    
+    func playSound(type: Int)
+    {
+        if type == 0        //Sound for wrong answer
+        {
+            let correctSound = SKAction.playSoundFileNamed("Sound/Powerup.aif", waitForCompletion: false)
+            nextButton.runAction(correctSound)
+        }
+        else if type == 1   //Sound for correct answer
+        {
+            let wrongSound = SKAction.playSoundFileNamed("Sound/Hurt.aif", waitForCompletion: false)
+            nextButton.runAction(wrongSound)
+        }
     }
     
     //Mark: Load Scene

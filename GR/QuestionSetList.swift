@@ -43,7 +43,7 @@ class QuestionSetList: NSObject {
     func generateLevel1List()
     {
         //Question set 1
-        var tip = "In Australia There are many local collection programs for different types of e-waste including electronic equipment."
+        var tip = "Australia has many local collection programs for different types of e-waste including electronic equipment."
         var ans1 = makeAnswer("No way", boolVal: false)
         var ans2 = makeAnswer("Do nothing", boolVal: false)
         var ans3 = makeAnswer("Break them in pieces", boolVal: false)
@@ -63,27 +63,27 @@ class QuestionSetList: NSObject {
         questionList.append(qs2)
         
         //Question set 3
-        tip = "In Australia There are many local collection programs for different types of e-waste including electronic equipment."
+        tip = "Australia has many collection programs for different types of e-waste including electronic equipment."
         ans1 = makeAnswer("No, collect them", boolVal: false)
         ans2 = makeAnswer("Yes, that's the best solution", boolVal: true)
-        ans3 = makeAnswer("Make a pile of waste in the living room", boolVal: false)
+        ans3 = makeAnswer("Make a pile in the living room", boolVal: false)
         ans4 = makeAnswer("Break them in pieces", boolVal: false)
         ques = "Should mobile phones or computers be recycled?"
         let qs3 = QuestionSet(tip: tip, question: ques, answer1: ans1, answer2: ans2, answer3: ans3, answer4: ans4)
         questionList.append(qs3)
         
         //Question set 4
-        tip = "In Australia There are many local collection programs for different types of e-waste including electronic equipment."
+        tip = "Australia has many collection programs for different types of e-waste including electronic equipment."
         ans1 = makeAnswer("No, collect them", boolVal: false)
-        ans2 = makeAnswer("Yes, that's the best solution", boolVal: true)
-        ans3 = makeAnswer("Make a pile of waste in the living room", boolVal: false)
-        ans4 = makeAnswer("Break them in pieces", boolVal: false)
+        ans2 = makeAnswer("No, break them in pieces", boolVal: false)
+        ans3 = makeAnswer("Make a pile in the living room", boolVal: false)
+        ans4 = makeAnswer("Yes, ofcourse!", boolVal: true)
         ques = "Should televisions be recycled?"
         let qs4 = QuestionSet(tip: tip, question: ques, answer1: ans1, answer2: ans2, answer3: ans3, answer4: ans4)
         questionList.append(qs4)
         
         //Question set 5
-        tip = "Australian’s recycling requirements apply to everyone in the state, in both public and private spaces. This includes daycares, schools, public places, businesses, special events, homes and apartments"
+        tip = "Australian’s recycling requirements apply to everyone in the state, in both public and private spaces."
         ans1 = makeAnswer("17 Natural trees", boolVal: true)
         ans2 = makeAnswer("4,100 kilowatt-hours of electricity", boolVal: true)
         ans3 = makeAnswer("Both of these answers", boolVal: true)

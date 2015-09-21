@@ -47,10 +47,10 @@ class Level1Grass: SKSpriteNode, EffectSprite {
     
     func playCreateAnimation(canvasSize: CGSize)
     {
-        let moveGrass1 = SKAction.moveTo(CGPoint(x: canvasSize.width * -250, y: 100), duration: 2)
-        let moveGrass2 = SKAction.moveTo(CGPoint(x: canvasSize.width * -100, y: 400), duration: 2)
-        let moveGrass3 = SKAction.moveTo(CGPoint(x: canvasSize.width * 100, y: 200), duration: 2)
-        let moveGrass4 = SKAction.moveTo(CGPoint(x: canvasSize.width * 300, y: 100), duration: 2)
+        let moveGrass1 = SKAction.moveTo(CGPoint(x: -200, y: canvasSize.height * 0.17), duration: 2)
+        let moveGrass2 = SKAction.moveTo(CGPoint(x: 200, y: canvasSize.height * 0.3), duration: 2)
+        let moveGrass3 = SKAction.moveTo(CGPoint(x: 300, y: canvasSize.height * 0.25), duration: 2)
+        let moveGrass4 = SKAction.moveTo(CGPoint(x: 440, y: canvasSize.height * 0.35), duration: 2)
         
         grass1.runAction(moveGrass1)
         grass2.runAction(moveGrass2)
