@@ -225,17 +225,19 @@ class Level3Scene: SKScene {
     {
         let wrong = SKSpriteNode (imageNamed: "wrong-answer.png")
         wrong.position = CGPointMake(0 - wrong.size.width, self.size.height * 0.5)
-        wrong.setScale(0.75)
+        wrong.setScale(1)
         wrong.zPosition = -10
         self.addChild(wrong)
         
         let moveAction = SKAction.moveTo(CGPoint(x: self.size.width * 0.5, y: self.size.height * 0.5), duration: 0.75)
         let moveAction2 = SKAction.moveTo(CGPoint(x: self.size.width + wrong.size.width , y: self.size.height * 0.5), duration: 0.75)
-        let wait = SKAction.waitForDuration(3.0)
-        let seq = SKAction.sequence([moveAction, wait, moveAction2])
+        let wait = SKAction.waitForDuration(1.5)
+        let remove = SKAction.runBlock({
+            wrong.removeFromParent()
+        })
+        let seq = SKAction.sequence([moveAction, wait, moveAction2, remove])
         
         wrong.runAction(seq)
-        wrong.removeFromParent()
     }
     
     //Mark: Tip Sprite
@@ -445,8 +447,10 @@ class Level3Scene: SKScene {
                 correctAnswers++
                 
             } else {
-                wrongAnswerEffect()
                 playSound(0)
+                if counter < 4{
+                    wrongAnswerEffect()
+                }
             }
             
             self.counter++

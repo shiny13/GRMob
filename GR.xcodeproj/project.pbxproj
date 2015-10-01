@@ -51,6 +51,7 @@
 		3D4403D81BAC9D800013934B /* Level1Horses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4403D71BAC9D800013934B /* Level1Horses.swift */; settings = {ASSET_TAGS = (); }; };
 		3D4403DA1BACB3E60013934B /* EffectSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4403D91BACB3E60013934B /* EffectSprite.swift */; settings = {ASSET_TAGS = (); }; };
 		3D4403E01BACD9A50013934B /* Sound in Resources */ = {isa = PBXBuildFile; fileRef = 3D4403DF1BACD9A50013934B /* Sound */; settings = {ASSET_TAGS = (); }; };
+		3D47CEA81BBD69E500DD095E /* StreamScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D47CEA71BBD69E500DD095E /* StreamScanner.swift */; settings = {ASSET_TAGS = (); }; };
 		3D4D9C021BBCC73300C5F0D0 /* LevelComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4D9C011BBCC73300C5F0D0 /* LevelComplete.swift */; settings = {ASSET_TAGS = (); }; };
 		3D4D9C061BBCDADC00C5F0D0 /* power-up-star.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4D9C051BBCDADC00C5F0D0 /* power-up-star.png */; settings = {ASSET_TAGS = (); }; };
 		3D4D9C081BBCDFE500C5F0D0 /* EndComplete.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4D9C071BBCDFE500C5F0D0 /* EndComplete.png */; settings = {ASSET_TAGS = (); }; };
@@ -152,6 +153,11 @@
 		3D4403D71BAC9D800013934B /* Level1Horses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level1Horses.swift; sourceTree = "<group>"; };
 		3D4403D91BACB3E60013934B /* EffectSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectSprite.swift; sourceTree = "<group>"; };
 		3D4403DF1BACD9A50013934B /* Sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sound; sourceTree = "<group>"; };
+		3D47CEA71BBD69E500DD095E /* StreamScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamScanner.swift; sourceTree = "<group>"; };
+		3D47CEB31BBD7FAD00DD095E /* level1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
+		3D47CEB41BBD7FAD00DD095E /* level2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
+		3D47CEB51BBD7FAD00DD095E /* level3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level3.txt; sourceTree = "<group>"; };
+		3D47CEB61BBD7FAD00DD095E /* level4.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level4.txt; sourceTree = "<group>"; };
 		3D4D9C011BBCC73300C5F0D0 /* LevelComplete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelComplete.swift; sourceTree = "<group>"; };
 		3D4D9C051BBCDADC00C5F0D0 /* power-up-star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "power-up-star.png"; sourceTree = "<group>"; };
 		3D4D9C071BBCDFE500C5F0D0 /* EndComplete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EndComplete.png; sourceTree = "<group>"; };
@@ -217,6 +223,7 @@
 		3D2EC1731B938CB800DAF2CB = {
 			isa = PBXGroup;
 			children = (
+				3D47CEB21BBD7FAD00DD095E /* input */,
 				3D115C821BB048F4001048CC /* AVKit.framework */,
 				3D115C801BB048EB001048CC /* AVFoundation.framework */,
 				3D4D9C051BBCDADC00C5F0D0 /* power-up-star.png */,
@@ -323,6 +330,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		3D47CEB21BBD7FAD00DD095E /* input */ = {
+			isa = PBXGroup;
+			children = (
+				3D47CEB31BBD7FAD00DD095E /* level1.txt */,
+				3D47CEB41BBD7FAD00DD095E /* level2.txt */,
+				3D47CEB51BBD7FAD00DD095E /* level3.txt */,
+				3D47CEB61BBD7FAD00DD095E /* level4.txt */,
+			);
+			path = input;
+			sourceTree = "<group>";
+		};
 		3D5ECAC81B9820DD00EC34CF /* Sprite */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,6 +374,7 @@
 		3DA1EA4E1B958AD00053DA62 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3D47CEA71BBD69E500DD095E /* StreamScanner.swift */,
 				3DA1EA511B958B7C0053DA62 /* Answer.swift */,
 				3DA1EA4F1B958B6E0053DA62 /* QuestionSet.swift */,
 				3DA1EA531B958E8A0053DA62 /* QuestionSetList.swift */,
@@ -415,6 +434,7 @@
 				TargetAttributes = {
 					3D2EC17B1B938CB800DAF2CB = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = QLMPCP4884;
 					};
 					3D2EC1941B938CB900DAF2CB = {
 						CreatedOnToolsVersion = 6.4;
@@ -537,6 +557,7 @@
 				3D4D9C131BBD3A2000C5F0D0 /* Level3Crab.swift in Sources */,
 				3D4D9C171BBD3A2000C5F0D0 /* Level3Seaweed.swift in Sources */,
 				3D4D9C181BBD3A2000C5F0D0 /* Level4Grass.swift in Sources */,
+				3D47CEA81BBD69E500DD095E /* StreamScanner.swift in Sources */,
 				3D4D9C191BBD3A2000C5F0D0 /* Level4Horse.swift in Sources */,
 				3D115C971BB0A2BC001048CC /* Level2Grass.swift in Sources */,
 				3D2EC1821B938CB900DAF2CB /* AppDelegate.swift in Sources */,
@@ -672,6 +693,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = GR/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -682,6 +704,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = GR/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

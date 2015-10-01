@@ -226,17 +226,19 @@ class Level4Scene: SKScene {
     {
         let wrong = SKSpriteNode (imageNamed: "wrong-answer.png")
         wrong.position = CGPointMake(0 - wrong.size.width, self.size.height * 0.5)
-        wrong.setScale(0.75)
+        wrong.setScale(1)
         wrong.zPosition = -10
         self.addChild(wrong)
         
         let moveAction = SKAction.moveTo(CGPoint(x: self.size.width * 0.5, y: self.size.height * 0.5), duration: 0.75)
         let moveAction2 = SKAction.moveTo(CGPoint(x: self.size.width + wrong.size.width , y: self.size.height * 0.5), duration: 0.75)
-        let wait = SKAction.waitForDuration(3.0)
-        let seq = SKAction.sequence([moveAction, wait, moveAction2])
+        let wait = SKAction.waitForDuration(1.0)
+        let remove = SKAction.runBlock({
+            wrong.removeFromParent()
+        })
+        let seq = SKAction.sequence([moveAction, wait, moveAction2, remove])
         
         wrong.runAction(seq)
-        wrong.removeFromParent()
     }
     
     //Mark: Tip Sprite
@@ -446,8 +448,11 @@ class Level4Scene: SKScene {
                 correctAnswers++
             }
             else {
-                wrongAnswerEffect()
                 playSound(0)
+                if counter < 4{
+                    wrongAnswerEffect()
+                }
+                
             }
             
             self.counter++
@@ -509,6 +514,7 @@ class Level4Scene: SKScene {
         completed.spawn(self, canvasSize: self.size)
         completed.setCorrectQuestion(correctAnswers)
         
+        let wait1 = SKAction.waitForDuration(2.6)
         let sound = SKAction.playSoundFileNamed("woohoo.mp3", waitForCompletion: false)
         let moveAction = SKAction.moveTo(CGPoint(x: self.size.width * 0.28, y: self.size.height * 0.3), duration: 0.5)
         let removeLabels = SKAction.runBlock({
@@ -516,11 +522,11 @@ class Level4Scene: SKScene {
         })
         let groupAction = SKAction.group([moveAction, sound, removeLabels])
         
-        let wait = SKAction.waitForDuration(3.5)
+        let wait2 = SKAction.waitForDuration(3.5)
         let starAnimation = SKAction.runBlock({
             completed.starAnimation(self.correctAnswers)
         })
-        let groupAction2 = SKAction.group([wait, starAnimation])
+        let groupAction2 = SKAction.group([wait2, starAnimation])
         
         let transition = SKAction.runBlock({
             let transition = SKTransition.crossFadeWithDuration(0.5)
@@ -529,7 +535,7 @@ class Level4Scene: SKScene {
         })
         let moveAction2 = SKAction.moveTo(CGPoint(x: self.size.width + completed.size.width, y: self.size.height * 0.3), duration: 0.5)
         
-        let seq = SKAction.sequence([groupAction, groupAction2, moveAction2, transition])
+        let seq = SKAction.sequence([wait1, groupAction, groupAction2, moveAction2, transition])
         
         completed.runAction(seq)
     }

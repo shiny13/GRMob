@@ -25,6 +25,7 @@ class QuestionSetList: NSObject {
         {
             case 1:
                 generateLevel1List()
+                //readFile("level1.txt")
                 testList()
             case 2:
                 generateLevel1List()
@@ -101,9 +102,75 @@ class QuestionSetList: NSObject {
         return answer
     }
     
-    func readFile(name: String)
+    func readFile(fileName: String)
     {
-        
+        if let input = NSFileHandle(forReadingAtPath: "/Users/shahnawaz/Desktop/level1.txt")
+        //if let input = NSBundle.mainBundle().pathForResource(fileName, ofType:"txt")
+        {
+            let scanner = StreamScanner(source: input, delimiters: NSCharacterSet(charactersInString: ":\n"))
+            
+            print("Input from text file:")
+            var num: Int = 1
+            var tip: String = ""
+            var question: String = ""
+            var ansText: String = ""
+            var ans1: Answer = Answer()
+            var ans2: Answer = Answer()
+            var ans3: Answer = Answer()
+            var ans4: Answer = Answer()
+            
+            while let line: String = scanner.read()
+            {
+                switch (num)
+                {
+                case 1: tip = line
+                    break
+                case 2: question = line
+                    break
+                case 3: ansText = line
+                    break
+                case 4: if (line == "true"){
+                    ans1 = makeAnswer(ansText, boolVal: true)
+                } else if (line == "false") {
+                    ans1 = makeAnswer(ansText, boolVal: false)
+                }
+                    break
+                case 5: ansText = line
+                    break
+                case 6: if (line == "true"){
+                    ans2 = makeAnswer(ansText, boolVal: true)
+                } else if (line == "false") {
+                    ans2 = makeAnswer(ansText, boolVal: false)
+                }
+                    break
+                case 7: ansText = line
+                    break
+                case 8: if (line == "true"){
+                    ans3 = makeAnswer(ansText, boolVal: true)
+                } else if (line == "false") {
+                    ans3 = makeAnswer(ansText, boolVal: false)
+                }
+                    break
+                case 9: ansText = line
+                    break
+                case 10: if (line == "true"){
+                    ans4 = makeAnswer(ansText, boolVal: true)
+                } else if (line == "false") {
+                    ans4 = makeAnswer(ansText, boolVal: false)
+                }
+                    break
+                default:
+                    break
+                }
+                
+                num++
+                if num > 10{
+                    let qs = QuestionSet(tip: tip, question: question, answer1: ans1, answer2: ans2, answer3: ans3, answer4: ans4)
+                    questionList.append(qs)
+                    num = 1
+                }
+            }
+        }
         
     }
     
