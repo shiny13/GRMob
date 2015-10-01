@@ -18,6 +18,7 @@ class Level1Scene: SKScene {
     var score: Int
     var touch: Int
     var level: Int
+    var correctAnswers: Int = 0
     var correct: Bool = false
     let menuButton = SKSpriteNode (imageNamed: "Menu2.png")
     var nextButton = SKSpriteNode (imageNamed: "arrow.png")
@@ -27,11 +28,11 @@ class Level1Scene: SKScene {
     var check4: SKSpriteNode = SKSpriteNode (imageNamed: "unchecked.png")
     var counterHolder = [SKSpriteNode]()
     var spriteEffects = [SKSpriteNode]()
-    var qLabel = SKLabelNode(fontNamed:"Cochin")
-    var answer1 = SKLabelNode(fontNamed:"Cochin")
-    var answer2 = SKLabelNode(fontNamed:"Cochin")
-    var answer3 = SKLabelNode(fontNamed:"Cochin")
-    var answer4 = SKLabelNode(fontNamed:"Cochin")
+    var qLabel = SKLabelNode(fontNamed:"Helvetica")
+    var answer1 = SKLabelNode(fontNamed:"Helvetica")
+    var answer2 = SKLabelNode(fontNamed:"Helvetica")
+    var answer3 = SKLabelNode(fontNamed:"Helvetica")
+    var answer4 = SKLabelNode(fontNamed:"Helvetica")
     var scoreLabel = SKLabelNode(fontNamed: "Thonburi")
     let tipSprite = TipSprite()
     
@@ -238,24 +239,6 @@ class Level1Scene: SKScene {
         wrong.removeFromParent()
     }
     
-    func levelCompletedEffect()
-    {
-        let completed = SKSpriteNode (imageNamed: "levelcompleted.png")
-        completed.position = CGPointMake(0 - completed.size.width, self.size.height * 0.5)
-        completed.setScale(0.75)
-        completed.zPosition = -10
-        self.addChild(completed)
-        
-        let moveAction = SKAction.moveTo(CGPoint(x: self.size.width * 0.5, y: self.size.height * 0.5), duration: 0.75)
-        let wait = SKAction.waitForDuration(4.5)
-        let wait2 = SKAction.waitForDuration(1.0)
-        let seq = SKAction.sequence([wait, moveAction, wait2])
-        
-        completed.runAction(seq)
-        completed.removeFromParent()
-    }
-
-    
     //Mark: Tip Sprite
     func generateTipSprite() {
         
@@ -460,6 +443,7 @@ class Level1Scene: SKScene {
             {
                 correctAnswerEffect()
                 playSound(1)
+                correctAnswers++
                 
             } else {
                 wrongAnswerEffect()
@@ -471,9 +455,7 @@ class Level1Scene: SKScene {
             print("Count val: \(self.quesList.questionList.count)")
             if counter >= self.quesList.questionList.count {
                 saveScore()
-                levelCompletedEffect()
-                let newScene = GameScene(size: self.size)
-                loadScene(newScene)
+                endSceneWithEffect()
                 
             }
             else {
@@ -519,6 +501,52 @@ class Level1Scene: SKScene {
         let transition = SKTransition.crossFadeWithDuration(0.5)
         newScene.scaleMode = SKSceneScaleMode.AspectFill
         self.scene!.view?.presentScene(newScene, transition: transition)
+    }
+    
+    //MARK: Next scene with effect
+    func endSceneWithEffect()
+    {
+        let completed = LevelComplete()
+        completed.spawn(self, canvasSize: self.size)
+        completed.setCorrectQuestion(correctAnswers)
+        
+        let sound = SKAction.playSoundFileNamed("woohoo.mp3", waitForCompletion: false)
+        let moveAction = SKAction.moveTo(CGPoint(x: self.size.width * 0.28, y: self.size.height * 0.3), duration: 0.5)
+        let removeLabels = SKAction.runBlock({
+            self.removeLabels()
+        })
+        let groupAction = SKAction.group([moveAction, sound, removeLabels])
+        
+        let wait = SKAction.waitForDuration(3.5)
+        let starAnimation = SKAction.runBlock({
+            completed.starAnimation(self.correctAnswers)
+        })
+        let groupAction2 = SKAction.group([wait, starAnimation])
+        
+        let transition = SKAction.runBlock({
+            let transition = SKTransition.crossFadeWithDuration(0.5)
+            let scene = GameScene(size: self.size)
+            self.view?.presentScene(scene, transition: transition)
+        })
+        let moveAction2 = SKAction.moveTo(CGPoint(x: self.size.width + completed.size.width, y: self.size.height * 0.3), duration: 0.5)
+        
+        let seq = SKAction.sequence([groupAction, groupAction2, moveAction2, transition])
+        
+        completed.runAction(seq)
+    }
+    
+    //MARK: Remove all labels
+    func removeLabels ()
+    {
+        qLabel.removeFromParent()
+        answer1.removeFromParent()
+        answer2.removeFromParent()
+        answer3.removeFromParent()
+        answer4.removeFromParent()
+        check1.removeFromParent()
+        check2.removeFromParent()
+        check3.removeFromParent()
+        check4.removeFromParent()
     }
     
     //MARK: Simulate physics

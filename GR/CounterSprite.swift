@@ -48,8 +48,8 @@ class CounterSprite: SKSpriteNode {
     }
     
     func createAnimations () {
-        spawnAction = SKAction.scaleTo(1, duration: 1.5)
-        unfadeAction = SKAction.scaleTo(0, duration: 1.5)
+        spawnAction = SKAction.scaleTo(1, duration: 1)
+        unfadeAction = SKAction.scaleTo(0, duration: 1)
     }
     
     func runSpawnAction(){

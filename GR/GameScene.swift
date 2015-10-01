@@ -13,9 +13,6 @@ class GameScene: SKScene {
     
     // Create the world as a generic SKNode
     let world = SKNode()
-    
-    let nextButton: SKSpriteNode = SKSpriteNode(imageNamed: "Next.png")
-    let skipButton = SKSpriteNode(imageNamed: "skip.png")
     let bgImage = SKSpriteNode(imageNamed: "signs_of_spring_2-wallpaper-1024x1024.jpg")
     let bgAustralia = SKSpriteNode(imageNamed: "Australia-01.png")
     
@@ -87,15 +84,6 @@ class GameScene: SKScene {
         bgAustralia.zPosition = -10
         bgAustralia.setScale(0.4)
         self.addChild(bgAustralia)
-        
-        /*nextButton.position = CGPointMake(nextButton.size.width/2, nextButton.size.height/2 + 80)
-        nextButton.name = "nextButton"
-        self.addChild(nextButton)
-        
-        skipButton.position = CGPointMake(self.size.width/2, skipButton.size.height/2 + 5)
-        skipButton.name = "skipButton"
-        skipButton.setScale(0.5)
-        self.addChild(skipButton)*/
         
         spawnButtons(tree, width: self.size.width * 0.35, height: self.size.height * 0.7, scale: 0.3, name: "tree")
         spawnButtons(paper, width: self.size.width * 0.6, height: self.size.height * 0.7, scale: 0.35, name: "paper")

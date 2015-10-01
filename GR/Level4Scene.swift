@@ -18,6 +18,7 @@ class Level4Scene: SKScene {
     var score: Int
     var touch: Int
     var level: Int
+    var correctAnswers: Int = 0
     var correct: Bool = false
     let menuButton = SKSpriteNode (imageNamed: "Menu2.png")
     var nextButton = SKSpriteNode (imageNamed: "arrow.png")
@@ -60,7 +61,7 @@ class Level4Scene: SKScene {
         self.backgroundColor = UIColor(red: 0, green: 0.96, blue:
             1.0, alpha: 1.0);
         
-        let background = SKSpriteNode(imageNamed: "MapEnvir1-11.png")
+        let background = SKSpriteNode(imageNamed: "MapEnvir3-12.png")
         background.position = CGPointMake(self.size.width/2, self.size.height/2)
         background.setScale(0.5)
         background.zPosition = -20
@@ -193,9 +194,9 @@ class Level4Scene: SKScene {
         birds.spawn(world, canvasSize: self.size)
         let clouds = Level1Clouds()
         clouds.spawn(world, canvasSize: self.size)
-        let grass = Level1Grass()
+        let grass = Level4Grass()
         grass.spawn(world, canvasSize: self.size)
-        let horses = Level1Horses()
+        let horses = Level4Horse()
         horses.spawn(world, canvasSize: self.size)
         
         spriteEffects = [birds, clouds, grass, horses]
@@ -211,10 +212,10 @@ class Level4Scene: SKScene {
         case 1: let clouds:Level1Clouds = spriteEffects[counter] as! Level1Clouds
         clouds.playCreateAnimation(self.size)
         break;
-        case 2: let grass:Level1Grass = spriteEffects[counter] as! Level1Grass
+        case 2: let grass:Level4Grass = spriteEffects[counter] as! Level4Grass
         grass.playCreateAnimation(self.size)
         break;
-        case 3: let horses:Level1Horses = spriteEffects[counter] as! Level1Horses
+        case 3: let horses:Level4Horse = spriteEffects[counter] as! Level4Horse
         horses.playCreateAnimation(self.size)
         break;
         default: break
@@ -237,24 +238,6 @@ class Level4Scene: SKScene {
         wrong.runAction(seq)
         wrong.removeFromParent()
     }
-    
-    func levelCompletedEffect()
-    {
-        let completed = SKSpriteNode (imageNamed: "levelcompleted.png")
-        completed.position = CGPointMake(0 - completed.size.width, self.size.height * 0.5)
-        completed.setScale(0.75)
-        completed.zPosition = -10
-        self.addChild(completed)
-        
-        let moveAction = SKAction.moveTo(CGPoint(x: self.size.width * 0.5, y: self.size.height * 0.5), duration: 0.75)
-        let wait = SKAction.waitForDuration(4.5)
-        let wait2 = SKAction.waitForDuration(1.0)
-        let seq = SKAction.sequence([wait, moveAction, wait2])
-        
-        completed.runAction(seq)
-        completed.removeFromParent()
-    }
-    
     
     //Mark: Tip Sprite
     func generateTipSprite() {
@@ -460,8 +443,9 @@ class Level4Scene: SKScene {
             {
                 correctAnswerEffect()
                 playSound(1)
-                
-            } else {
+                correctAnswers++
+            }
+            else {
                 wrongAnswerEffect()
                 playSound(0)
             }
@@ -471,10 +455,7 @@ class Level4Scene: SKScene {
             print("Count val: \(self.quesList.questionList.count)")
             if counter >= self.quesList.questionList.count {
                 saveScore()
-                levelCompletedEffect()
-                let newScene = GameScene(size: self.size)
-                loadScene(newScene)
-                
+                endSceneWithEffect()
             }
             else {
                 if self.touch < 1 {
@@ -519,6 +500,52 @@ class Level4Scene: SKScene {
         let transition = SKTransition.crossFadeWithDuration(0.5)
         newScene.scaleMode = SKSceneScaleMode.AspectFill
         self.scene!.view?.presentScene(newScene, transition: transition)
+    }
+    
+    //MARK: Next scene with effect
+    func endSceneWithEffect()
+    {
+        let completed = LevelComplete()
+        completed.spawn(self, canvasSize: self.size)
+        completed.setCorrectQuestion(correctAnswers)
+        
+        let sound = SKAction.playSoundFileNamed("woohoo.mp3", waitForCompletion: false)
+        let moveAction = SKAction.moveTo(CGPoint(x: self.size.width * 0.28, y: self.size.height * 0.3), duration: 0.5)
+        let removeLabels = SKAction.runBlock({
+            self.removeLabels()
+        })
+        let groupAction = SKAction.group([moveAction, sound, removeLabels])
+        
+        let wait = SKAction.waitForDuration(3.5)
+        let starAnimation = SKAction.runBlock({
+            completed.starAnimation(self.correctAnswers)
+        })
+        let groupAction2 = SKAction.group([wait, starAnimation])
+        
+        let transition = SKAction.runBlock({
+            let transition = SKTransition.crossFadeWithDuration(0.5)
+            let scene = GameScene(size: self.size)
+            self.view?.presentScene(scene, transition: transition)
+        })
+        let moveAction2 = SKAction.moveTo(CGPoint(x: self.size.width + completed.size.width, y: self.size.height * 0.3), duration: 0.5)
+        
+        let seq = SKAction.sequence([groupAction, groupAction2, moveAction2, transition])
+        
+        completed.runAction(seq)
+    }
+    
+    //MARK: Remove all labels
+    func removeLabels ()
+    {
+        qLabel.removeFromParent()
+        answer1.removeFromParent()
+        answer2.removeFromParent()
+        answer3.removeFromParent()
+        answer4.removeFromParent()
+        check1.removeFromParent()
+        check2.removeFromParent()
+        check3.removeFromParent()
+        check4.removeFromParent()
     }
     
     //MARK: Simulate physics
