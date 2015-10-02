@@ -21,6 +21,12 @@ class GameScene: SKScene {
     let water:SKSpriteNode = SKSpriteNode(imageNamed: "MrWater-02.png")
     let tree:SKSpriteNode = SKSpriteNode(imageNamed: "mrTree-02.png")
     let paper:SKSpriteNode = SKSpriteNode(imageNamed: "MrPaper-02.png")
+    let videoButton: SKSpriteNode = SKSpriteNode(imageNamed: "icon-video.png")
+    let skip = SKLabelNode(fontNamed: "Helvetica")
+    
+    // Video Sprite Node
+    var player:AVPlayer?
+    var videoNode:SKVideoNode?
     
     func spawnBees()
     {
@@ -48,27 +54,34 @@ class GameScene: SKScene {
     
     func playVideo()
     {
-        var tvMaskNode = SKSpriteNode()
-        tvMaskNode.size = self.size
-        //SKCropNode *cropNode = [SKCropNode node];
-        //cropNode.maskNode = tvMaskNode;
-        // 3
-       /* NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"BookTrailer" ofType:@"m4v"]];
-        var fileURL = NSURL(fileURLWithPath: "videos/animation1_v3.mp4")
-        var player = [AVPlayer playerWithURL: fileURL];
-        // 4
-        _videoNode = [[SKVideoNode alloc] initWithAVPlayer:_player];
-        _videoNode.size = CGRectInset(frame,frame.size.width * .15,frame.size.height * .27).size;
-        _videoNode.position = CGPointMake(-frame.size.width * .1, -frame.size.height * .06);
-        // 5
-        [cropNode addChild:_videoNode];
-        [self addChild:cropNode];
-        // 6
-        self.position = frame.origin; 
-        self.size = frame.size;
-        // 7
-        _player.volume = 0.0;
-        [_videoNode play]; */
+        // play video
+        
+        if let urlStr = NSBundle.mainBundle().pathForResource("into_main_v3", ofType: "mp4")
+        {
+            let url = NSURL(fileURLWithPath: urlStr)
+            print(url)
+            player = AVPlayer(URL: url)
+        
+            videoNode = SKVideoNode(AVPlayer: player!)
+            videoNode?.position = CGPointMake(frame.size.width/2, frame.size.height/2)
+            videoNode?.size = CGSize(width: self.size.width, height: self.size.height)
+            videoNode?.zPosition = 1
+            addChild(videoNode!)
+        
+            /*let play = SKAction.runBlock({
+                self.videoNode!.play()
+            })
+            let wait = SKAction.waitForDuration(35)
+            let playGroup = SKAction.group([play, wait])
+            let remove = SKAction.runBlock({
+                self.skip.removeFromParent()
+                self.videoNode!.removeFromParent()
+            })
+            let seq = SKAction.sequence([playGroup, remove])
+            videoNode!.runAction(seq)*/
+        
+            videoNode!.play()
+        }
     }
     
     override func didMoveToView(view: SKView) {
@@ -84,6 +97,13 @@ class GameScene: SKScene {
         bgAustralia.zPosition = -10
         bgAustralia.setScale(0.4)
         self.addChild(bgAustralia)
+        
+        videoButton.position = CGPointMake(self.size.width * 0.85, self.size.height * 0.2)
+        videoButton.zPosition = -10
+        videoButton.setScale(0.5)
+        videoButton.name = "video"
+        self.addChild(videoButton)
+
         
         spawnButtons(tree, width: self.size.width * 0.35, height: self.size.height * 0.7, scale: 0.3, name: "tree")
         spawnButtons(paper, width: self.size.width * 0.6, height: self.size.height * 0.7, scale: 0.35, name: "paper")
@@ -111,8 +131,25 @@ class GameScene: SKScene {
                 
         spawnBees()
         
+        skip.text = "Skip"
+        skip.fontSize = 30
+        skip.fontColor = SKColor(red: 1.0, green: 0.96, blue: 0.56, alpha: 1)
+        skip.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.1)
+        skip.zPosition = 5
+        skip.name = "skip"
+        self.addChild(skip)
+        
         //For testing, start with level 1
         //NSUserDefaults.standardUserDefaults().setInteger(1, forKey:"Level")
+        
+    }
+    
+    //MARK: Remove video
+    func removeVideo()
+    {
+        videoNode!.pause()
+        videoNode!.removeFromParent()
+        skip.removeFromParent()
     }
     
     func saveLevel(level: Int){
@@ -121,36 +158,12 @@ class GameScene: SKScene {
         defaults.synchronize()
     }
     
-    func loadLevel1()
+    //Mark: Load Scene
+    func loadScene(newScene: SKScene)
     {
-        let secondScene = Level1Scene(size: self.size)
         let transition = SKTransition.crossFadeWithDuration(0.5)
-        secondScene.scaleMode = SKSceneScaleMode.AspectFill
-        self.scene!.view?.presentScene(secondScene, transition: transition)
-    }
-    
-    func loadLevel2()
-    {
-        let secondScene = Level2Scene(size: self.size)
-        let transition = SKTransition.crossFadeWithDuration(0.5)
-        secondScene.scaleMode = SKSceneScaleMode.AspectFill
-        self.scene!.view?.presentScene(secondScene, transition: transition)
-    }
-    
-    func loadLevel3()
-    {
-        let secondScene = Level3Scene(size: self.size)
-        let transition = SKTransition.crossFadeWithDuration(0.5)
-        secondScene.scaleMode = SKSceneScaleMode.AspectFill
-        self.scene!.view?.presentScene(secondScene, transition: transition)
-    }
-    
-    func loadLevel4()
-    {
-        let secondScene = Level4Scene(size: self.size)
-        let transition = SKTransition.crossFadeWithDuration(0.5)
-        secondScene.scaleMode = SKSceneScaleMode.AspectFill
-        self.scene!.view?.presentScene(secondScene, transition: transition)
+        newScene.scaleMode = SKSceneScaleMode.AspectFill
+        self.scene!.view?.presentScene(newScene, transition: transition)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -159,25 +172,39 @@ class GameScene: SKScene {
         let location = touch.first!.locationInNode(self)
         let node = self.nodeAtPoint(location)
         
+        if (node.name == "video")
+        {
+            playVideo()
+        }
+        
+        if (node.name == "skip")
+        {
+            removeVideo()
+        }
+        
         if (node.name == "tree")
         {
             saveLevel(1)
-            loadLevel1()
+            let newScene = Level1Scene(size: self.size)
+            loadScene(newScene)
         }
         else if (node.name == "paper")
         {
             saveLevel(2)
-            loadLevel2()
+            let newScene = Level2Scene(size: self.size)
+            loadScene(newScene)
         }
         else if (node.name == "water")
         {
             saveLevel(3)
-            loadLevel3()
+            let newScene = Level3Scene(size: self.size)
+            loadScene(newScene)
         }
         else if (node.name == "recycle")
         {
             saveLevel(4)
-            loadLevel4()
+            let newScene = Level4Scene(size: self.size)
+            loadScene(newScene)
         }
         
     }
