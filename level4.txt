@@ -1,0 +1,50 @@
+Australia has many local collection programs for different types of e-waste including electronic equipment.
+Should electronic waste be recycled?
+No way
+false
+Do nothing
+false
+Break them in pieces
+false
+Yes, ofcourse
+true
+Magazines, catalogs and other materials printed on similar paper should be recycled.
+What is the best thing to do with old newspapers?
+Throw them in the recycle bin
+true
+Do nothing
+false
+Make a paper plane
+false
+Make a boat
+false
+Australia has many collection programs for different types of e-waste including electronic equipment.
+Should mobile phones or computers be recycled?
+No, collect them
+false
+Yes, that's the best solution
+true
+Make a pile in the living room
+false
+Break them in pieces
+false
+Australia has many collection programs for different types of e-waste including electronic equipment.
+Should television be recycled?
+No, collect them
+false
+No, break them in pieces
+false
+Burn them
+false
+Yes, recycle them
+true
+Australian’s recycling requirements apply to everyone in the state, in both public and private spaces.
+Recycling 1 ton of paper saves?
+17 Natural trees
+true
+4,100 kilowatt-hours of electricity
+true
+Both of these answers
+true
+None of them
+false

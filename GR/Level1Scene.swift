@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 class Level1Scene: SKScene {
     
@@ -20,6 +21,7 @@ class Level1Scene: SKScene {
     var level: Int
     var correctAnswers: Int = 0
     var correct: Bool = false
+    let skip = SKLabelNode(fontNamed: "Helvetica")
     let menuButton = SKSpriteNode (imageNamed: "Menu2.png")
     var nextButton = SKSpriteNode (imageNamed: "arrow.png")
     var check1: SKSpriteNode = SKSpriteNode (imageNamed: "unchecked.png")
@@ -35,6 +37,11 @@ class Level1Scene: SKScene {
     var answer4 = SKLabelNode(fontNamed:"Helvetica")
     var scoreLabel = SKLabelNode(fontNamed: "Thonburi")
     let tipSprite = TipSprite()
+    let completed = LevelComplete()
+    
+    // Video Sprite Node
+    var player:AVPlayer?
+    var videoNode:SKVideoNode?
     
     //The ground node
     let ground = Ground()
@@ -140,7 +147,7 @@ class Level1Scene: SKScene {
         self.correct = false
         self.touch = 0
         print("Counter \(counter)")
-        let quesSet: QuestionSet = quesList.questionList[self.counter]
+        let quesSet: QuestionSet = quesList.qList[self.counter]
         
         if self.counter == 0 {
             drawLabelSprite(quesSet)
@@ -367,14 +374,53 @@ class Level1Scene: SKScene {
         let sequence = SKAction.sequence([scaleAction, fadeAway, removeNode])
         tryLabel.runAction(sequence)
     }
+    
+    //MARK: Play Video
+    func playVideo()
+    {
+        // play video
         
+        if let urlStr = NSBundle.mainBundle().pathForResource("Animation1", ofType: "mp4")
+        {
+            let url = NSURL(fileURLWithPath: urlStr)
+            print(url)
+            player = AVPlayer(URL: url)
+            
+            videoNode = SKVideoNode(AVPlayer: player!)
+            videoNode!.position = CGPointMake(frame.size.width/2, frame.size.height/2)
+            videoNode!.size = CGSize(width: self.size.width, height: self.size.height)
+            videoNode!.zPosition = 1
+            addChild(videoNode!)
+            
+            let play = SKAction.runBlock({
+                self.videoNode!.play()
+            })
+            let wait = SKAction.waitForDuration(11)
+            let playGroup = SKAction.group([play, wait])
+            let remove = SKAction.runBlock({
+                self.skip.removeFromParent()
+                self.videoNode!.removeFromParent()
+            })
+            let seq = SKAction.sequence([playGroup, remove])
+            videoNode!.runAction(seq)
+            
+            /*skip.text = "Skip"
+            skip.fontSize = 30
+            skip.fontColor = SKColor(red: 1.0, green: 0.96, blue: 0.56, alpha: 1)
+            skip.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.1)
+            skip.zPosition = 5
+            skip.name = "skip"
+            self.addChild(skip)*/
+        }
+    }
+
     //MARK: Handle touch events
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         let touch = touches 
         let location = touch.first!.locationInNode(self)
         let node = self.nodeAtPoint(location)
-        let quesSet: QuestionSet = quesList.questionList[self.counter]
+        let quesSet: QuestionSet = quesList.qList[self.counter]
         
         // If next button is touched, start transition to second scene
         if node.name == "check1" {
@@ -456,8 +502,8 @@ class Level1Scene: SKScene {
             
             self.counter++
             
-            print("Count val: \(self.quesList.questionList.count)")
-            if counter >= self.quesList.questionList.count {
+            print("Count val: \(self.quesList.qList.count)")
+            if counter >= self.quesList.qList.count {
                 saveScore()
                 endSceneWithEffect()
                 
@@ -483,6 +529,13 @@ class Level1Scene: SKScene {
             loadScene(newScene)
         }
         
+        if node.name == "skip"
+        {
+            removeVideo()
+            let newScene = GameScene(size: self.size)
+            loadScene(newScene)
+        }
+                
     }
     
     func playSound(type: Int)
@@ -510,7 +563,6 @@ class Level1Scene: SKScene {
     //MARK: Next scene with effect
     func endSceneWithEffect()
     {
-        let completed = LevelComplete()
         completed.spawn(self, canvasSize: self.size)
         completed.setCorrectQuestion(correctAnswers)
         
@@ -523,7 +575,7 @@ class Level1Scene: SKScene {
         
         let wait = SKAction.waitForDuration(3.5)
         let starAnimation = SKAction.runBlock({
-            completed.starAnimation(self.correctAnswers)
+            self.completed.starAnimation(self.correctAnswers)
         })
         let groupAction2 = SKAction.group([wait, starAnimation])
         
@@ -534,9 +586,15 @@ class Level1Scene: SKScene {
         })
         let moveAction2 = SKAction.moveTo(CGPoint(x: self.size.width + completed.size.width, y: self.size.height * 0.3), duration: 0.5)
         
-        let seq = SKAction.sequence([groupAction, groupAction2, moveAction2, transition])
+        let playVideo = SKAction.runBlock({
+            self.playVideo()
+        })
+        let wait2 = SKAction.waitForDuration(11)
+        let groupAction3 = SKAction.group([playVideo, wait2])
         
-        completed.runAction(seq)
+        let seq = SKAction.sequence([groupAction, groupAction2, moveAction2, groupAction3, transition])
+        
+        completed.runAction(seq, withKey: "end")
     }
     
     //MARK: Remove all labels
@@ -551,6 +609,19 @@ class Level1Scene: SKScene {
         check2.removeFromParent()
         check3.removeFromParent()
         check4.removeFromParent()
+    }
+    
+    //MARK: Remove video
+    func removeVideo()
+    {
+        if videoNode!.paused !=  true
+        {
+            videoNode!.pause()
+        }
+        videoNode!.removeAllActions()
+        videoNode!.removeFromParent()
+        skip.removeFromParent()
+        completed.removeAllActions()
     }
     
     //MARK: Simulate physics

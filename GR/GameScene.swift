@@ -52,6 +52,7 @@ class GameScene: SKScene {
         self.addChild(sprite)
     }
     
+    //MARK: Play Video
     func playVideo()
     {
         // play video
@@ -68,7 +69,7 @@ class GameScene: SKScene {
             videoNode?.zPosition = 1
             addChild(videoNode!)
         
-            /*let play = SKAction.runBlock({
+            let play = SKAction.runBlock({
                 self.videoNode!.play()
             })
             let wait = SKAction.waitForDuration(35)
@@ -78,9 +79,15 @@ class GameScene: SKScene {
                 self.videoNode!.removeFromParent()
             })
             let seq = SKAction.sequence([playGroup, remove])
-            videoNode!.runAction(seq)*/
-        
-            videoNode!.play()
+            videoNode!.runAction(seq)
+            
+            skip.text = "Skip"
+            skip.fontSize = 30
+            skip.fontColor = SKColor(red: 1.0, green: 0.96, blue: 0.56, alpha: 1)
+            skip.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.1)
+            skip.zPosition = 5
+            skip.name = "skip"
+            self.addChild(skip)
         }
     }
     
@@ -131,14 +138,6 @@ class GameScene: SKScene {
                 
         spawnBees()
         
-        skip.text = "Skip"
-        skip.fontSize = 30
-        skip.fontColor = SKColor(red: 1.0, green: 0.96, blue: 0.56, alpha: 1)
-        skip.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.1)
-        skip.zPosition = 5
-        skip.name = "skip"
-        self.addChild(skip)
-        
         //For testing, start with level 1
         //NSUserDefaults.standardUserDefaults().setInteger(1, forKey:"Level")
         
@@ -147,7 +146,10 @@ class GameScene: SKScene {
     //MARK: Remove video
     func removeVideo()
     {
-        videoNode!.pause()
+        if videoNode!.paused !=  true
+        {
+            videoNode!.pause()
+        }
         videoNode!.removeFromParent()
         skip.removeFromParent()
     }
