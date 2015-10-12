@@ -13,6 +13,7 @@ class LevelComplete: SKSpriteNode, EffectSprite {
     let completed = SKSpriteNode (imageNamed: "EndComplete.png")
     let completeLabel = SKLabelNode(fontNamed:"Helvetica")
     let correctLabel = SKLabelNode(fontNamed:"Helvetica")
+    let scoreLabel = SKLabelNode(fontNamed:"Helvetica")
     let star1 = SKSpriteNode (imageNamed: "power-up-star.png")
     let star2 = SKSpriteNode (imageNamed: "power-up-star.png")
     let star3 = SKSpriteNode (imageNamed: "power-up-star.png")
@@ -29,15 +30,21 @@ class LevelComplete: SKSpriteNode, EffectSprite {
         completeLabel.text = "Level Completed!"
         completeLabel.fontSize = 40
         completeLabel.fontColor = SKColor(red: 0.94, green: 0.72, blue: 0.38, alpha: 1)
-        completed.zPosition = 5
-        completeLabel.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.85)
+        completeLabel.zPosition = 5
+        completeLabel.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.9)
         self.addChild(completeLabel)
         
         correctLabel.fontSize = 30
         correctLabel.fontColor = SKColor(red: 0.94, green: 0.72, blue: 0.38, alpha: 1)
-        completed.zPosition = 5
-        correctLabel.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.65)
+        correctLabel.zPosition = 5
+        correctLabel.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.75)
         self.addChild(correctLabel)
+        
+        scoreLabel.fontSize = 30
+        scoreLabel.fontColor = SKColor(red: 0.94, green: 0.72, blue: 0.38, alpha: 1)
+        scoreLabel.zPosition = 5
+        scoreLabel.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.55)
+        self.addChild(scoreLabel)
         
         star1.position = CGPointMake(self.size.width * 0.15, self.size.height * 0.35)
         star1.setScale(1)
@@ -78,9 +85,10 @@ class LevelComplete: SKSpriteNode, EffectSprite {
 
     }
     
-    func setCorrectQuestion( answers: Int)
+    func setCorrectQuestion( answers: Int, score: Int)
     {
         correctLabel.text = "You have \(answers) out of 5 correct. "
+        scoreLabel.text = "Your score: \(score). "
     }
     
     func playCreateAnimation(canvasSize: CGSize)

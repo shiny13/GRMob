@@ -321,12 +321,25 @@ class QuestionSetList: NSObject {
         while (i < 5)
         {
             let qs = questionList[randomNumber()] as QuestionSet
-            qList.append(qs)
-            i++
+            var duplicate = false
+            
+            for ql in qList
+            {
+                if ql.question == qs.question
+                {
+                    duplicate = true
+                }
+            }
+            
+            if duplicate == false
+            {
+                qList.append(qs)
+                i++
+            }
         }
     }
     
-    func randomNumber(range: Range<Int> = 1...13) -> Int {
+    func randomNumber(range: Range<Int> = 0...12) -> Int {
         let min = range.startIndex
         let max = range.endIndex
         return Int(arc4random_uniform(UInt32(max - min))) + min

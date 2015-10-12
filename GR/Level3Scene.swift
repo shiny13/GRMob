@@ -309,8 +309,7 @@ class Level3Scene: SKScene {
         self.score = 0
         self.level = 1 //Default value to avoid errors
         
-        loadSavedScore()
-        loadSavedLevel()
+        //loadSavedLevel()
         
         quesList = QuestionSetList(level: level)
         generateBackground()
@@ -332,18 +331,6 @@ class Level3Scene: SKScene {
             // does not exist
             print("Saving score for the 1st time")
             NSUserDefaults.standardUserDefaults().setInteger(self.score, forKey:"Score")
-        }
-    }
-    
-    func loadSavedLevel() {
-        if let key: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("Level"){
-            self.level = key as! IntegerLiteralType
-            print("Retrieving level: \(level)")
-        }
-        else {
-            // does not exist
-            print("Saving level for the 1st time")
-            NSUserDefaults.standardUserDefaults().setInteger(self.level, forKey:"Level")
         }
     }
     
@@ -428,7 +415,7 @@ class Level3Scene: SKScene {
             self.check4.texture = SKTexture(imageNamed: "unchecked.png")
             
             if self.touch < 1 && quesSet.answer1.correct == true {
-                self.score += 1000
+                self.score += 100
                 self.correct = true
                 print("Touch Began Score: \(score)")
             }
@@ -444,7 +431,7 @@ class Level3Scene: SKScene {
             self.check4.texture = SKTexture(imageNamed: "unchecked.png")
             
             if self.touch < 1 && quesSet.answer2.correct == true {
-                self.score += 1000
+                self.score += 100
                 self.correct = true
                 print("Touch Began Score: \(score)")
             }
@@ -459,7 +446,7 @@ class Level3Scene: SKScene {
             self.check4.texture = SKTexture(imageNamed: "unchecked.png")
             
             if self.touch < 1 && quesSet.answer3.correct == true {
-                self.score += 1000
+                self.score += 100
                 self.correct = true
                 print("Touch Began Score: \(score)")
             }
@@ -475,7 +462,7 @@ class Level3Scene: SKScene {
             self.check4.texture = SKTexture(imageNamed: "checked.png")
             
             if self.touch < 1 && quesSet.answer4.correct == true {
-                self.score += 1000
+                self.score += 100
                 self.correct = true
                 print("Touch Began Score: \(score)")
             }
@@ -491,6 +478,10 @@ class Level3Scene: SKScene {
                 playSound(1)
                 correctAnswers++
                 
+            } else if self.correct == false && self.touch < 1 {
+                playSound(0)
+                tryAgainEffect()
+                return
             } else {
                 playSound(0)
                 if counter < 4{
@@ -502,15 +493,10 @@ class Level3Scene: SKScene {
             
             print("Count val: \(self.quesList.qList.count)")
             if counter >= self.quesList.qList.count {
-                saveScore()
+                //saveScore()
                 endSceneWithEffect()
             }
             else {
-                if self.touch < 1 {
-                    self.counter--
-                    tryAgainEffect()
-                    return;
-                }
                 
                 generateQuestion()
                 self.check1.texture = SKTexture(imageNamed: "unchecked.png")
@@ -540,12 +526,12 @@ class Level3Scene: SKScene {
     {
         if type == 0        //Sound for wrong answer
         {
-            let correctSound = SKAction.playSoundFileNamed("Sound/Powerup.aif", waitForCompletion: false)
+            let correctSound = SKAction.playSoundFileNamed("Sound/Bleep-sound.mp3", waitForCompletion: false)
             nextButton.runAction(correctSound)
         }
         else if type == 1   //Sound for correct answer
         {
-            let wrongSound = SKAction.playSoundFileNamed("Sound/Hurt.aif", waitForCompletion: false)
+            let wrongSound = SKAction.playSoundFileNamed("Sound/Correct-answer.mp3", waitForCompletion: false)
             nextButton.runAction(wrongSound)
         }
     }
@@ -561,16 +547,16 @@ class Level3Scene: SKScene {
     //MARK: Next scene with effect
     func endSceneWithEffect()
     {
+        self.userInteractionEnabled = false
+        removeButtonsLabels()
         let completed = LevelComplete()
         completed.spawn(self, canvasSize: self.size)
-        completed.setCorrectQuestion(correctAnswers)
+        completed.setCorrectQuestion(correctAnswers, score: self.score)
         
         let sound = SKAction.playSoundFileNamed("woohoo.mp3", waitForCompletion: false)
         let moveAction = SKAction.moveTo(CGPoint(x: self.size.width * 0.28, y: self.size.height * 0.3), duration: 0.5)
-        let removeLabels = SKAction.runBlock({
-            self.removeLabels()
-        })
-        let groupAction = SKAction.group([moveAction, sound, removeLabels])
+        
+        let groupAction = SKAction.group([moveAction, sound])
         
         let wait = SKAction.waitForDuration(3.5)
         let starAnimation = SKAction.runBlock({
@@ -579,6 +565,7 @@ class Level3Scene: SKScene {
         let groupAction2 = SKAction.group([wait, starAnimation])
         
         let transition = SKAction.runBlock({
+            self.userInteractionEnabled = true
             let transition = SKTransition.crossFadeWithDuration(0.5)
             let scene = GameScene(size: self.size)
             self.view?.presentScene(scene, transition: transition)
@@ -596,9 +583,20 @@ class Level3Scene: SKScene {
         completed.runAction(seq)
     }
     
-    //MARK: Remove all labels
-    func removeLabels ()
+    //MARK: Remove all buttons and labels
+    func removeButtonsLabels ()
     {
+        //Remove the buttons
+        self.nextButton.removeFromParent()
+        self.menuButton.removeFromParent()
+        self.tipSprite.removeFromParent()
+        
+        for counter in counterHolder
+        {
+            counter.removeFromParent()
+        }
+        
+        //Remove the labels
         qLabel.removeFromParent()
         answer1.removeFromParent()
         answer2.removeFromParent()
@@ -608,6 +606,7 @@ class Level3Scene: SKScene {
         check2.removeFromParent()
         check3.removeFromParent()
         check4.removeFromParent()
+        scoreLabel.removeFromParent()
     }
     
     //MARK: Remove video
