@@ -95,7 +95,8 @@ class Level1Scene: SKScene {
         qLabel.text = quesSet.question as String
         qLabel.fontSize = 25
         qLabel.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
-        qLabel.position = CGPointMake(self.size.width/2, self.size.height * 0.89)
+        qLabel.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.9)
+        qLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
         self.addChild(qLabel)
         
         //let questionScale = SKAction.scaleTo(1, duration: 1.5)
@@ -104,26 +105,29 @@ class Level1Scene: SKScene {
         answer1.text = quesSet.answer1.answer as String
         answer1.fontSize = 25
         answer1.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
-        
-        answer1.position = CGPointMake(self.size.width * 0.45, self.size.height * 0.83)
+        answer1.position = CGPointMake(self.size.width * 0.3, self.size.height * 0.83)
+        answer1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
         self.addChild(answer1)
         
         answer2.text = quesSet.answer2.answer as String
         answer2.fontSize = 25
         answer2.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
-        answer2.position = CGPointMake(self.size.width * 0.45, self.size.height * 0.74)
+        answer2.position = CGPointMake(self.size.width * 0.3, self.size.height * 0.74)
+        answer2.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
         self.addChild(answer2)
         
         answer3.text = quesSet.answer3.answer as String
         answer3.fontSize = 25
         answer3.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
-        answer3.position = CGPointMake(self.size.width * 0.45, self.size.height * 0.65)
+        answer3.position = CGPointMake(self.size.width * 0.3, self.size.height * 0.65)
+        answer3.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
         self.addChild(answer3)
         
         answer4.text = quesSet.answer4.answer as String
         answer4.fontSize = 25
         answer4.fontColor = SKColor(red: 0, green: 0, blue: 0.2, alpha: 1)
-        answer4.position = CGPointMake(self.size.width * 0.45, self.size.height * 0.56)
+        answer4.position = CGPointMake(self.size.width * 0.3, self.size.height * 0.56)
+        answer4.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
         self.addChild(answer4)
         
         scoreLabel.text = "Score: \(score)"

@@ -28,43 +28,43 @@ class IntroScene: SKScene {
         self.addChild(bg)
         
         girl1.position = CGPointMake(-500, self.size.height * 0.75)
-        girl1.zPosition = -5
+        girl1.zPosition = -8
         girl1.setScale(0.5)
         self.addChild(girl1)
         
-        cloud1.position = CGPointMake(-500, self.size.height * 0.88)
-        cloud1.zPosition = -8
-        cloud1.setScale(0.5)
+        cloud1.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.75)
+        cloud1.zPosition = -5
+        cloud1.setScale(0.0001)
         self.addChild(cloud1)
         
         boy1.position = CGPointMake(2700, self.size.height * 0.75)
-        boy1.zPosition = -5
+        boy1.zPosition = -8
         boy1.setScale(0.5)
         self.addChild(boy1)
         
-        cloud2.position = CGPointMake(2700, self.size.height * 0.88)
-        cloud2.zPosition = -8
-        cloud2.setScale(0.5)
+        cloud2.position = CGPointMake(self.size.width * 0.75, self.size.height * 0.75)
+        cloud2.zPosition = -5
+        cloud2.setScale(0.0001)
         self.addChild(cloud2)
         
         girl2.position = CGPointMake(-500, self.size.height * 0.25)
-        girl2.zPosition = -5
+        girl2.zPosition = -8
         girl2.setScale(0.5)
         self.addChild(girl2)
         
-        cloud3.position = CGPointMake(-500, self.size.height * 0.38)
-        cloud3.zPosition = -8
-        cloud3.setScale(0.5)
+        cloud3.position = CGPointMake(self.size.width * 0.25, self.size.height * 0.25)
+        cloud3.zPosition = -5
+        cloud3.setScale(0.0001)
         self.addChild(cloud3)
         
         boy2.position = CGPointMake(2700, self.size.height * 0.25)
-        boy2.zPosition = -5
+        boy2.zPosition = -8
         boy2.setScale(0.5)
         self.addChild(boy2)
         
-        cloud4.position = CGPointMake(2700, self.size.height * 0.38)
-        cloud4.zPosition = -8
-        cloud4.setScale(0.5)
+        cloud4.position = CGPointMake(self.size.width * 0.75, self.size.height * 0.25)
+        cloud4.zPosition = -5
+        cloud4.setScale(0.0001)
         self.addChild(cloud4)
         
         moveSprites()
@@ -77,34 +77,39 @@ class IntroScene: SKScene {
         girl1.runAction(movegirl1)
         
         let wait1 = SKAction.waitForDuration(0.35)
+        let scaleCloud = SKAction.scaleTo(0.5, duration: 0.5)
         let moveCloud1 = SKAction.moveTo(CGPointMake(self.size.width * 0.4, self.size.height * 0.88), duration: 0.5)
-        cloud1.runAction(SKAction.sequence([wait1, moveCloud1]))
+        let group1 = SKAction.group([scaleCloud, moveCloud1])
+        cloud1.runAction(SKAction.sequence([wait1, group1]))
         
         let wait2 = SKAction.waitForDuration(0.75)
-        let moveboy1 = SKAction.moveTo(CGPointMake(self.size.width * 0.75, self.size.height * 0.75), duration: 0.5)
+        let moveboy1 = SKAction.moveTo(CGPointMake(self.size.width * 0.735, self.size.height * 0.75), duration: 0.5)
         boy1.runAction(SKAction.sequence([wait2, moveboy1]))
         
-        let wait3 = SKAction.waitForDuration(1)
+        let wait3 = SKAction.waitForDuration(1.5)
         let moveCloud2 = SKAction.moveTo(CGPointMake(self.size.width * 0.88, self.size.height * 0.88), duration: 0.5)
-        cloud2.runAction(SKAction.sequence([wait3, moveCloud2]))
+        let group2 = SKAction.group([scaleCloud, moveCloud2])
+        cloud2.runAction(SKAction.sequence([wait3, group2]))
         
-        let wait4 = SKAction.waitForDuration(1.5)
+        let wait4 = SKAction.waitForDuration(2.75)
         let movegirl2 = SKAction.moveTo(CGPointMake(self.size.width * 0.25, self.size.height * 0.25), duration: 0.5)
         girl2.runAction(SKAction.sequence([wait4, movegirl2]))
         
-        let wait5 = SKAction.waitForDuration(1.75)
-        let moveCloud3 = SKAction.moveTo(CGPointMake(self.size.width * 0.4, self.size.height * 0.38), duration: 0.5)
-        cloud3.runAction(SKAction.sequence([wait5, moveCloud3]))
+        let wait5 = SKAction.waitForDuration(3.5)
+        let moveCloud3 = SKAction.moveTo(CGPointMake(self.size.width * 0.4, self.size.height * 0.36), duration: 0.5)
+        let group3 = SKAction.group([scaleCloud, moveCloud3])
+        cloud3.runAction(SKAction.sequence([wait5, group3]))
         
-        let wait6 = SKAction.waitForDuration(2.5)
+        let wait6 = SKAction.waitForDuration(4.25)
         let moveboy2 = SKAction.moveTo(CGPointMake(self.size.width * 0.75, self.size.height * 0.25), duration: 0.5)
         boy2.runAction(SKAction.sequence([wait6, moveboy2]))
         
-        let wait7 = SKAction.waitForDuration(2.75)
+        let wait7 = SKAction.waitForDuration(5)
         let moveCloud4 = SKAction.moveTo(CGPointMake(self.size.width * 0.88, self.size.height * 0.38), duration: 0.5)
-        cloud4.runAction(SKAction.sequence([wait7, moveCloud4]))
+        let group4 = SKAction.group([scaleCloud, moveCloud4])
+        cloud4.runAction(SKAction.sequence([wait7, group4]))
         
-        let wait8 = SKAction.waitForDuration(5.5)
+        let wait8 = SKAction.waitForDuration(8.5)
         let transition = SKAction.runBlock({
             self.userInteractionEnabled = true
             let transition = SKTransition.crossFadeWithDuration(0.5)
