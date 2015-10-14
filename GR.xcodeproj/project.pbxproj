@@ -117,6 +117,9 @@
 		3D9E3BF01BABA89D004168D3 /* mrTree-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9E3BEF1BABA89D004168D3 /* mrTree-02.png */; };
 		3D9E3BF21BABA8A7004168D3 /* MrWater-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9E3BF11BABA8A7004168D3 /* MrWater-02.png */; };
 		3D9E3BF41BABA8AE004168D3 /* RecycleBin-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9E3BF31BABA8AE004168D3 /* RecycleBin-01.png */; };
+		3D9EC74B1BCEA18F00DDDD80 /* icon-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9EC74A1BCEA18F00DDDD80 /* icon-01.png */; settings = {ASSET_TAGS = (); }; };
+		3D9EC74D1BCEA2AC00DDDD80 /* splash-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9EC74C1BCEA2AC00DDDD80 /* splash-01.png */; settings = {ASSET_TAGS = (); }; };
+		3D9EC74F1BCEA35900DDDD80 /* Launch.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D9EC74E1BCEA35900DDDD80 /* Launch.xcassets */; settings = {ASSET_TAGS = (); }; };
 		3DA1EA4D1B9585C70053DA62 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA1EA4C1B9585C70053DA62 /* arrow.png */; };
 		3DA1EA501B958B6E0053DA62 /* QuestionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA1EA4F1B958B6E0053DA62 /* QuestionSet.swift */; };
 		3DA1EA521B958B7C0053DA62 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA1EA511B958B7C0053DA62 /* Answer.swift */; };
@@ -257,6 +260,9 @@
 		3D9E3BEF1BABA89D004168D3 /* mrTree-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mrTree-02.png"; sourceTree = "<group>"; };
 		3D9E3BF11BABA8A7004168D3 /* MrWater-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MrWater-02.png"; sourceTree = "<group>"; };
 		3D9E3BF31BABA8AE004168D3 /* RecycleBin-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecycleBin-01.png"; sourceTree = "<group>"; };
+		3D9EC74A1BCEA18F00DDDD80 /* icon-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-01.png"; sourceTree = "<group>"; };
+		3D9EC74C1BCEA2AC00DDDD80 /* splash-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash-01.png"; sourceTree = "<group>"; };
+		3D9EC74E1BCEA35900DDDD80 /* Launch.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Launch.xcassets; sourceTree = "<group>"; };
 		3DA1EA4C1B9585C70053DA62 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		3DA1EA4F1B958B6E0053DA62 /* QuestionSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionSet.swift; sourceTree = "<group>"; };
 		3DA1EA511B958B7C0053DA62 /* Answer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
@@ -317,6 +323,7 @@
 		3D2EC1731B938CB800DAF2CB = {
 			isa = PBXGroup;
 			children = (
+				3D9EC74E1BCEA35900DDDD80 /* Launch.xcassets */,
 				3D36F04A1BC2F4F100B6ED7B /* AudioToolbox.framework */,
 				3D36F0481BC2F4E300B6ED7B /* CFNetwork.framework */,
 				3D36F0461BC2F4D200B6ED7B /* CoreGraphics.framework */,
@@ -339,6 +346,8 @@
 				3D36F02C1BC2C24400B6ED7B /* level3.txt */,
 				3D36F02D1BC2C24400B6ED7B /* level4.txt */,
 				3D36F0201BC2A98800B6ED7B /* Anim4.mp4 */,
+				3D9EC74C1BCEA2AC00DDDD80 /* splash-01.png */,
+				3D9EC74A1BCEA18F00DDDD80 /* icon-01.png */,
 				3D167BDA1BCC4396001DAEAC /* boy-01.png */,
 				3D167BDB1BCC4396001DAEAC /* boy-02.png */,
 				3D167BDC1BCC4396001DAEAC /* cloud-01.png */,
@@ -597,6 +606,7 @@
 				3D36F01F1BC2A95700B6ED7B /* Anim4.mp4 in Resources */,
 				3D36F0191BC2973500B6ED7B /* Animation1.mp4 in Resources */,
 				3D36F01A1BC2973500B6ED7B /* Animation2.mp4 in Resources */,
+				3D9EC74F1BCEA35900DDDD80 /* Launch.xcassets in Resources */,
 				3D36F01B1BC2973500B6ED7B /* animation3_v1.mp4 in Resources */,
 				3D36F01D1BC2973500B6ED7B /* into_main_v3.mp4 in Resources */,
 				3D5ECAD61B9898AF00EC34CF /* checkbox.atlas in Resources */,
@@ -609,6 +619,7 @@
 				3D115C9F1BB0AE31001048CC /* MapEnvir2-10.png in Resources */,
 				3D2BEFF21BBEE75B00493CC0 /* icon-video.png in Resources */,
 				3D4403E01BACD9A50013934B /* Sound in Resources */,
+				3D9EC74D1BCEA2AC00DDDD80 /* splash-01.png in Resources */,
 				3D167BE31BCC4396001DAEAC /* boy-02.png in Resources */,
 				3D4403C61BAC9B8F0013934B /* cloud-07.png in Resources */,
 				3D167BE21BCC4396001DAEAC /* boy-01.png in Resources */,
@@ -635,6 +646,7 @@
 				3D9E3BF41BABA8AE004168D3 /* RecycleBin-01.png in Resources */,
 				3D167BD91BCC437A001DAEAC /* st_bg2.png in Resources */,
 				3D4D9C081BBCDFE500C5F0D0 /* EndComplete.png in Resources */,
+				3D9EC74B1BCEA18F00DDDD80 /* icon-01.png in Resources */,
 				3D115C9B1BB0AB30001048CC /* Rainbow-01.png in Resources */,
 				3D4403BC1BAC066A0013934B /* Menu2.png in Resources */,
 				3D4D9C201BBD3B9400C5F0D0 /* fish-02.png in Resources */,
@@ -835,6 +847,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -850,6 +863,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
